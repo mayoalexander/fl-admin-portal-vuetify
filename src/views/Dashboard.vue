@@ -4,6 +4,7 @@
     fluid
     grid-list-xl
   >
+    <!-- {{ quotas }} -->
     <v-layout wrap>
       <v-flex
         md12
@@ -16,7 +17,7 @@
           color="info"
           type="Line"
         >
-          <h4 class="title font-weight-light">Daily Sales</h4>
+          <h4 class="title font-weight-light">Payments</h4>
           <p class="category d-inline-flex font-weight-light">
             <v-icon
               color="green"
@@ -51,7 +52,7 @@
           color="red"
           type="Bar"
         >
-          <h4 class="title font-weight-light">Email Subscription</h4>
+          <h4 class="title font-weight-light">Services</h4>
           <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>
 
           <template slot="actions">
@@ -76,7 +77,7 @@
           color="green"
           type="Line"
         >
-          <h3 class="title font-weight-light">Completed Tasks</h3>
+          <h3 class="title font-weight-light">Signup</h3>
           <p class="category d-inline-flex font-weight-light">Last Last Campaign Performance</p>
 
           <template slot="actions">
@@ -94,13 +95,14 @@
         sm6
         xs12
         md6
-        lg3
+        lg4
       >
         <material-stats-card
-          color="green"
-          icon="mdi-store"
-          title="Revenue"
-          value="$34,245"
+          color="red"
+          icon="mdi-wallet"
+          title="Payments"
+          :value="'$' + quotas.payments.daily.current"
+          :small-value="'/' + quotas.payments.daily.quota"
           sub-icon="mdi-calendar"
           sub-text="Last 24 Hours"
         />
@@ -109,25 +111,73 @@
         sm6
         xs12
         md6
-        lg3
+        lg4
       >
         <material-stats-card
-          color="orange"
+          color="blue"
           icon="mdi-content-copy"
-          title="Used Space"
-          value="49/50"
-          small-value="GB"
-          sub-icon="mdi-alert"
-          sub-icon-color="error"
-          sub-text="Get More Space..."
-          sub-text-color="text-primary"
+          title="Services"
+          :value="quotas.services.daily.current"
+          :small-value="'/' + quotas.services.daily.quota"
+          sub-icon="mdi-calendar"
+          sub-text="Last 24 Hours"
         />
       </v-flex>
       <v-flex
         sm6
         xs12
         md6
-        lg3
+        lg4
+      >
+        <material-stats-card
+          color="purple"
+          icon="mdi-upload"
+          title="Uploads"
+          :value="quotas.uploads.daily.current"
+          :small-value="'/' + quotas.uploads.daily.quota"
+          sub-icon="mdi-calendar"
+          sub-text="Last 24 Hours"
+        />
+      </v-flex>
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg6
+      >
+        <material-stats-card
+          color="teal"
+          icon="mdi-pen"
+          title="Signup"
+          :value="quotas.signup.daily.current"
+          :small-value="'/' + quotas.signup.daily.quota"
+          sub-icon="mdi-calendar"
+          sub-text="Last 24 Hours"
+        />
+      </v-flex>
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg6
+      >
+        <material-stats-card
+          color="orange"
+          icon="mdi-eye"
+          title="Views"
+          :value="quotas.views.daily.current"
+          :small-value="'/' + quotas.views.daily.quota"
+          sub-icon="mdi-alert"
+          sub-icon-color="error"
+          sub-text="Get More Space..."
+          sub-text-color="text-primary"
+        />
+      </v-flex>
+      <!-- <v-flex
+        sm6
+        xs12
+        md6
+        lg4
       >
         <material-stats-card
           color="red"
@@ -137,22 +187,7 @@
           sub-icon="mdi-tag"
           sub-text="Tracked from Github"
         />
-      </v-flex>
-      <v-flex
-        sm6
-        xs12
-        md6
-        lg3
-      >
-        <material-stats-card
-          color="info"
-          icon="mdi-twitter"
-          title="Followers"
-          value="+245"
-          sub-icon="mdi-update"
-          sub-text="Just Updated"
-        />
-      </v-flex>
+      </v-flex> -->
       <v-flex
         md12
         lg6
@@ -364,6 +399,7 @@ import axios from 'axios'
 export default {
   data () {
     return {
+      quotas: null,
       dailySalesChart: {
         data: {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
@@ -511,10 +547,8 @@ export default {
     }
   },
   mounted () {
-    axios.get('https://freelabel.net/API/Content/getAdminLiked').then((res) => {
-      console.log({
-        res: res.data.data.content
-      })
+    axios.get('https://freelabel.net/API/Admin/Quotas').then((res) => {
+      this.quotas = res.data.data.quotas
     })
   }
 }
