@@ -194,12 +194,13 @@
       >
         <material-card
           color="orange"
-          title="Employee Stats"
+          title="Top Artists"
           text="New employees on 15th September, 2016"
         >
+          <!-- {{ top_artists }} -->
           <v-data-table
             :headers="headers"
-            :items="items"
+            :items="top_artists"
             hide-actions
           >
             <template
@@ -215,11 +216,16 @@
               slot="items"
               slot-scope="{ index, item }"
             >
-              <td>{{ index + 1 }}</td>
-              <td>{{ item.name }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
-              <td class="text-xs-right">{{ item.country }}</td>
-              <td class="text-xs-right">{{ item.city }}</td>
+              <!-- <td>{{ index + 1 }}</td> -->
+              <td class="font-weight-bold">
+                <a :href="'https://freelabel.net/' + item.twitter" target="_blank" class="black--text">{{ item.name }}</a>
+              </td>
+              <td class="text-xs-right">
+                <a :href="'https://instagram.com/' + item.instagram" target="_blank" class="black--text">{{ item.instagram }}</a>
+              </td>
+              <td class="text-xs-right">
+                <a :href="'https://twitter.com/' + item.twitter" target="_blank" class="black--text">{{ item.twitter }}</a>
+              </td>
             </template>
           </v-data-table>
         </material-card>
@@ -400,6 +406,7 @@ export default {
   data () {
     return {
       quotas: null,
+      top_artists: null,
       dailySalesChart: {
         data: {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
@@ -475,11 +482,11 @@ export default {
         ]
       },
       headers: [
-        {
-          sortable: false,
-          text: 'ID',
-          value: 'id'
-        },
+        // {
+        //   sortable: false,
+        //   text: 'ID',
+        //   value: 'id'
+        // },
         {
           sortable: false,
           text: 'Name',
@@ -487,20 +494,14 @@ export default {
         },
         {
           sortable: false,
-          text: 'Salary',
-          value: 'salary',
+          text: 'Instagram',
+          value: 'instagram',
           align: 'right'
         },
         {
           sortable: false,
-          text: 'Country',
-          value: 'country',
-          align: 'right'
-        },
-        {
-          sortable: false,
-          text: 'City',
-          value: 'city',
+          text: 'Twitter',
+          value: 'twitter',
           align: 'right'
         }
       ],
@@ -547,8 +548,16 @@ export default {
     }
   },
   mounted () {
+
     axios.get('https://freelabel.net/API/Admin/Quotas').then((res) => {
       this.quotas = res.data.data.quotas
+    })
+    axios.get('https://freelabel.net/API/Admin/Function/getIncompleteChartingProfiles').then((res) => {
+      let artists = res.data.data.content
+      artists = Object.keys(artists).map(function(key) {
+        return artists[key];
+      });
+      this.top_artists = artists
     })
   }
 }
