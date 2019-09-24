@@ -18,6 +18,7 @@
         lg4
       >
         <material-stats-card
+          class="darkBlue"
           color="red"
           icon="mdi-wallet"
           title="Payments"
@@ -34,6 +35,7 @@
         lg4
       >
         <material-stats-card
+          class="darkBlue"
           color="blue"
           icon="mdi-content-copy"
           title="Services"
@@ -50,6 +52,7 @@
         lg4
       >
         <material-stats-card
+          class="darkBlue"
           color="purple"
           icon="mdi-upload"
           title="Uploads"
@@ -66,6 +69,7 @@
         lg6
       >
         <material-stats-card
+          class="darkBlue"
           color="teal"
           icon="mdi-pen"
           title="Signup"
@@ -82,6 +86,7 @@
         lg6
       >
         <material-stats-card
+          class="darkBlue"
           color="orange"
           icon="mdi-eye"
           title="Views"
@@ -101,6 +106,7 @@
         <profile-list
           :top_artists="top_artists"
           :headers="headers"
+          class="darkBlue"
           />
       </v-flex>
       <v-flex
@@ -427,7 +433,9 @@ export default {
     }
   },
   mounted () {
-
+    console.log({
+      asdlkj: this
+    })
     axios.get('https://freelabel.net/API/Admin/Quotas').then((res) => {
       this.quotas = res.data.data.quotas
     })

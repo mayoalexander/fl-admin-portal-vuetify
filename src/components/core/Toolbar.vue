@@ -1,10 +1,10 @@
 <template>
   <v-toolbar
     id="core-toolbar"
-
+    dark
     flat
     prominent
-    style="background: #eee;"
+    class="darkBlue"
   >
     <div class="v-toolbar-title">
       <v-toolbar-title

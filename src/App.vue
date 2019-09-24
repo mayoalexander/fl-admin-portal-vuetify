@@ -1,5 +1,6 @@
 <template>
-  <v-app>
+  <v-app
+    class="darkGrey">
     <!-- <core-filter /> -->
 
     <core-toolbar />

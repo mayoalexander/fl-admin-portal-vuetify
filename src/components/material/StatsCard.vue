@@ -19,11 +19,11 @@
     </v-card>
     <div class="text-xs-right">
       <p
-        class="category grey--text font-weight-light"
+        class="category grey--text font-weight-light lightGrey--text"
         v-text="title"
       />
       <h3
-        class="title display-1 font-weight-light">
+        class="title display-1 font-weight-light lightGrey--text">
         {{ value }} <small>{{ smallValue }}</small>
       </h3>
     </div>
