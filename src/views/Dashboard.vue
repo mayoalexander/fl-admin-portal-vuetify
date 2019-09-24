@@ -5,92 +5,12 @@
     grid-list-xl
   >
     <!-- {{ quotas }} -->
-    <v-layout wrap>
-      <v-flex
-        md12
-        sm12
-        lg4
-      >
-        <material-chart-card
-          :data="dailySalesChart.data"
-          :options="dailySalesChart.options"
-          color="info"
-          type="Line"
-        >
-          <h4 class="title font-weight-light">Payments</h4>
-          <p class="category d-inline-flex font-weight-light">
-            <v-icon
-              color="green"
-              small
-            >
-              mdi-arrow-up
-            </v-icon>
-            <span class="green--text">55%</span>&nbsp;
-            increase in today's sales
-          </p>
+    <v-layout
+      v-if="quotas"
+      wrap>
 
-          <template slot="actions">
-            <v-icon
-              class="mr-2"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
-          </template>
-        </material-chart-card>
-      </v-flex>
-      <v-flex
-        md12
-        sm12
-        lg4
-      >
-        <material-chart-card
-          :data="emailsSubscriptionChart.data"
-          :options="emailsSubscriptionChart.options"
-          :responsive-options="emailsSubscriptionChart.responsiveOptions"
-          color="red"
-          type="Bar"
-        >
-          <h4 class="title font-weight-light">Services</h4>
-          <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>
+      <dashboard-graphs v-if="false"/>
 
-          <template slot="actions">
-            <v-icon
-              class="mr-2"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
-          </template>
-        </material-chart-card>
-      </v-flex>
-      <v-flex
-        md12
-        sm12
-        lg4
-      >
-        <material-chart-card
-          :data="dataCompletedTasksChart.data"
-          :options="dataCompletedTasksChart.options"
-          color="green"
-          type="Line"
-        >
-          <h3 class="title font-weight-light">Signup</h3>
-          <p class="category d-inline-flex font-weight-light">Last Last Campaign Performance</p>
-
-          <template slot="actions">
-            <v-icon
-              class="mr-2"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span>
-          </template>
-        </material-chart-card>
-      </v-flex>
       <v-flex
         sm6
         xs12
@@ -173,62 +93,15 @@
           sub-text-color="text-primary"
         />
       </v-flex>
-      <!-- <v-flex
-        sm6
-        xs12
-        md6
-        lg4
-      >
-        <material-stats-card
-          color="red"
-          icon="mdi-information-outline"
-          title="Fixed Issues"
-          value="75"
-          sub-icon="mdi-tag"
-          sub-text="Tracked from Github"
-        />
-      </v-flex> -->
+
       <v-flex
         md12
         lg6
       >
-        <material-card
-          color="orange"
-          title="Top Artists"
-          text="New employees on 15th September, 2016"
-        >
-          <!-- {{ top_artists }} -->
-          <v-data-table
-            :headers="headers"
-            :items="top_artists"
-            hide-actions
-          >
-            <template
-              slot="headerCell"
-              slot-scope="{ header }"
-            >
-              <span
-                class="font-weight-light text-warning text--darken-3"
-                v-text="header.text"
-              />
-            </template>
-            <template
-              slot="items"
-              slot-scope="{ index, item }"
-            >
-              <!-- <td>{{ index + 1 }}</td> -->
-              <td class="font-weight-bold">
-                <a :href="'https://freelabel.net/' + item.twitter" target="_blank" class="black--text">{{ item.name }}</a>
-              </td>
-              <td class="text-xs-right">
-                <a :href="'https://instagram.com/' + item.instagram" target="_blank" class="black--text">{{ item.instagram }}</a>
-              </td>
-              <td class="text-xs-right">
-                <a :href="'https://twitter.com/' + item.twitter" target="_blank" class="black--text">{{ item.twitter }}</a>
-              </td>
-            </template>
-          </v-data-table>
-        </material-card>
+        <profile-list
+          :top_artists="top_artists"
+          :headers="headers"
+          />
       </v-flex>
       <v-flex
         md12
@@ -402,7 +275,13 @@
 
 <script>
 import axios from 'axios'
+import DashboardGraphs from '@/components/Dashboard/Graphs'
+import ProfileList from '@/components/Profile/List'
 export default {
+  components: {
+    DashboardGraphs,
+    ProfileList
+  },
   data () {
     return {
       quotas: null,
