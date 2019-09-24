@@ -21,16 +21,16 @@
       >
         <v-list-tile avatar>
           <v-list-tile-avatar
-            color="white"
+            color="transparent"
           >
-            <v-img
-              :src="logo"
-              height="34"
-              contain
-            />
+          <img
+            :src="logo"
+            height="34"
+            contain
+          />
           </v-list-tile-avatar>
           <v-list-tile-title class="title">
-            Vuetify MD
+            FLADM.IN
           </v-list-tile-title>
         </v-list-tile>
         <v-divider/>
@@ -85,7 +85,7 @@ import {
 
 export default {
   data: () => ({
-    logo: './img/vuetifylogo.png',
+    logo: 'https://freelabel.net/assets/img/fllogo.png',
     links: [
       {
         to: '/dashboard',
