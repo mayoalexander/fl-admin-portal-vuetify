@@ -5,21 +5,7 @@
     grid-list-xl
   >
 
-    <v-layout align-center justify-center>
-      <v-flex>
-        <div
-          v-if="!quotas"
-          class="pa-5 grey--text text-xs-center">
-          <v-progress-circular
-            :size="70"
-            :width="7"
-            color="purple"
-            indeterminate
-          ></v-progress-circular>
-          <!-- <span class="title ml-3 font-weight-thin">Loading..</span> -->
-        </div>
-      </v-flex>
-    </v-layout>
+    <loading-spinner v-if="!quotas" />
 
     <v-layout
       v-if="quotas"

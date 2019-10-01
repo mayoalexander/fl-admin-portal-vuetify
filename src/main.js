@@ -35,6 +35,10 @@ import i18n from '@/i18n'
 import router from '@/router'
 import store from '@/store'
 
+import LoadingSpinner from '@/components/helper/LoadingSpinner'
+
+Vue.component('loading-spinner', LoadingSpinner)
+
 // Sync store with router
 sync(store, router)
 

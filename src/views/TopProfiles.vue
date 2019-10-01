@@ -1,6 +1,7 @@
 <template lang="html">
   <v-container class="pt-0">
     <h4 class="display-1 white--text">Top Profiles</h4>
+    <loading-spinner v-if="!topArtists" />
     <profile-list
       v-if="topArtists"
       :top_artists="topArtists"
