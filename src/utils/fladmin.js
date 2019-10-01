@@ -8,6 +8,12 @@ export const fladmin = {
     const res = await axios.get('https://freelabel.net/API/Admin/Quotas')
     return res.data.data.status
   },
+  async searchProfile (query) {
+    var options = new URLSearchParams()
+    options.append('query', query)
+    const res = await axios.post('https://freelabel.net/API/Profile/Search', options)
+    return res.data.data.profiles
+  },
   async getIncompleteChartingProfiles () {
     const res = await axios.get('https://freelabel.net/API/Admin/Function/getIncompleteChartingProfiles')
     let artists = res.data.data.content

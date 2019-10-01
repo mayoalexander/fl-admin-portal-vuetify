@@ -32,10 +32,12 @@
       >
         <v-text-field
           v-if="responsiveInput"
+          v-model="searchQuery"
           class="mr-4 mt-2 purple-input"
           label="Search..."
           hide-details
           color="purple"
+          @keyup.enter="searchSite()"
         />
         <router-link
           v-ripple
@@ -104,7 +106,8 @@ export default {
     notifications: [],
     title: null,
     responsive: false,
-    responsiveInput: false
+    responsiveInput: false,
+    searchQuery: null
   }),
   async mounted () {
     this.onResponsiveInverted()
@@ -126,6 +129,13 @@ export default {
     ...mapMutations('app', ['setDrawer', 'toggleDrawer']),
     onClickBtn () {
       this.setDrawer(!this.$store.state.app.drawer)
+    },
+    async searchSite () {
+      const res = await fladmin.searchProfile(this.searchQuery)
+      console.log({
+        search: this.searchQuery,
+        res
+      })
     },
     onClick () {
       //
