@@ -33,21 +33,12 @@ export default {
           text: 'Action',
           value: 'instagram',
           align: 'right'
-        } //,
-        // {
-        //   sortable: false,
-        //   text: 'Twitter',
-        //   value: 'twitter',
-        //   align: 'right'
-        // }
+        }
       ]
     }
   },
   async mounted () {
     const result = await fladmin.getNotifications()
-    console.log({
-      result
-    })
     this.notifications = result
   },
   computed: {
