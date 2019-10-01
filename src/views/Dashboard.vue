@@ -4,7 +4,23 @@
     fluid
     grid-list-xl
   >
-    <!-- {{ quotas }} -->
+
+    <v-layout align-center justify-center>
+      <v-flex>
+        <div
+          v-if="!quotas"
+          class="pa-5 grey--text text-xs-center">
+          <v-progress-circular
+            :size="70"
+            :width="7"
+            color="purple"
+            indeterminate
+          ></v-progress-circular>
+          <!-- <span class="title ml-3 font-weight-thin">Loading..</span> -->
+        </div>
+      </v-flex>
+    </v-layout>
+
     <v-layout
       v-if="quotas"
       wrap>
@@ -22,10 +38,11 @@
           color="red"
           icon="mdi-wallet"
           title="Payments"
-          :value="'$' + quotas.payments.daily.current"
+          :quota="quotas.payments"
+          :value="'$' + quotas.payments.daily.current.toString()"
           :small-value="'/' + quotas.payments.daily.quota"
           sub-icon="mdi-calendar"
-          sub-text="Last 24 Hours"
+          sub-text="Today"
         />
       </v-flex>
       <v-flex
@@ -39,10 +56,11 @@
           color="blue"
           icon="mdi-content-copy"
           title="Services"
-          :value="quotas.services.daily.current"
+          :quota="quotas.services"
+          :value="quotas.services.daily.current.toString()"
           :small-value="'/' + quotas.services.daily.quota"
           sub-icon="mdi-calendar"
-          sub-text="Last 24 Hours"
+          sub-text="Today"
         />
       </v-flex>
       <v-flex
@@ -56,10 +74,11 @@
           color="purple"
           icon="mdi-upload"
           title="Uploads"
-          :value="quotas.uploads.daily.current"
+          :quota="quotas.uploads"
+          :value="quotas.uploads.daily.current.toString()"
           :small-value="'/' + quotas.uploads.daily.quota"
           sub-icon="mdi-calendar"
-          sub-text="Last 24 Hours"
+          sub-text="Today"
         />
       </v-flex>
       <v-flex
@@ -72,11 +91,12 @@
           class="darkBlue"
           color="teal"
           icon="mdi-pen"
-          title="Signup"
-          :value="quotas.signup.daily.current"
+          title="Signups"
+          :quota="quotas.signup"
+          :value="quotas.signup.daily.current.toString()"
           :small-value="'/' + quotas.signup.daily.quota"
           sub-icon="mdi-calendar"
-          sub-text="Last 24 Hours"
+          sub-text="Today"
         />
       </v-flex>
       <v-flex
@@ -90,12 +110,30 @@
           color="orange"
           icon="mdi-eye"
           title="Views"
-          :value="quotas.views.daily.current"
+          :quota="quotas.views"
+          :value="quotas.views.daily.current.toString()"
           :small-value="'/' + quotas.views.daily.quota"
           sub-icon="mdi-alert"
-          sub-icon-color="error"
           sub-text="Get More Space..."
-          sub-text-color="text-primary"
+        />
+      </v-flex>
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg6
+        v-if="quotas.scans"
+      >
+        <material-stats-card
+          class="darkBlue"
+          color="green"
+          icon="mdi-qrcode"
+          title="Scans"
+          :quota="quotas.scans"
+          :value="quotas.scans.daily.current.toString()"
+          :small-value="'/' + quotas.scans.daily.quota"
+          sub-icon="mdi-alert"
+          sub-text="Get More Space..."
         />
       </v-flex>
 
@@ -104,7 +142,8 @@
         lg6
       >
         <profile-list
-          :top_artists="top_artists"
+          v-if="topArtists"
+          :top_artists="topArtists"
           :headers="headers"
           class="darkBlue"
           />
@@ -118,6 +157,7 @@
 import axios from 'axios'
 import DashboardGraphs from '@/components/Dashboard/Graphs'
 import ProfileList from '@/components/Profile/List'
+import { fladmin } from '@/utils/fladmin'
 export default {
   components: {
     DashboardGraphs,
@@ -201,30 +241,6 @@ export default {
           }]
         ]
       },
-      headers: [
-        // {
-        //   sortable: false,
-        //   text: 'ID',
-        //   value: 'id'
-        // },
-        {
-          sortable: false,
-          text: 'Name',
-          value: 'name'
-        },
-        {
-          sortable: false,
-          text: 'Instagram',
-          value: 'instagram',
-          align: 'right'
-        },
-        {
-          sortable: false,
-          text: 'Twitter',
-          value: 'twitter',
-          align: 'right'
-        }
-      ],
       items: [
         {
           name: 'Dakota Rice',
@@ -262,25 +278,19 @@ export default {
       }
     }
   },
+  computed: {
+    topArtists () {
+      return this.top_artists
+    }
+  },
   methods: {
     complete (index) {
       this.list[index] = !this.list[index]
     }
   },
-  mounted () {
-    console.log({
-      asdlkj: this
-    })
-    axios.get('https://freelabel.net/API/Admin/Quotas').then((res) => {
-      this.quotas = res.data.data.quotas
-    })
-    axios.get('https://freelabel.net/API/Admin/Function/getIncompleteChartingProfiles').then((res) => {
-      let artists = res.data.data.content
-      artists = Object.keys(artists).map(function(key) {
-        return artists[key];
-      });
-      this.top_artists = artists
-    })
+  async mounted () {
+    const quotas = await fladmin.getQuotas()
+    this.quotas = quotas
   }
 }
 </script>

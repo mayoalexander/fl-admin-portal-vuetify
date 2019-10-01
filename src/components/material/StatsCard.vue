@@ -4,6 +4,10 @@
     class="v-card--material-stats"
     v-on="$listeners"
   >
+    <div class="white--text text-capitalize">
+      {{ currentView }}
+    </div>
+
     <v-card
       slot="offset"
       :class="`elevation-${elevation}`"
@@ -19,28 +23,30 @@
     </v-card>
     <div class="text-xs-right">
       <p
-        class="category grey--text font-weight-light lightGrey--text"
+        class="display-1 category grey--text font-weight-light lightGrey--text"
         v-text="title"
       />
       <h3
         class="title display-1 font-weight-light lightGrey--text">
-        {{ value }} <small>{{ smallValue }}</small>
+        {{ currentData.current }} <small>/{{ currentData.quota }}</small>
       </h3>
     </div>
 
     <template slot="actions">
-      <v-icon
-        :color="subIconColor"
-        size="20"
-        class="mr-2"
-      >
-        {{ subIcon }}
-      </v-icon>
-      <span
-        :class="subTextColor"
-        class="caption font-weight-light"
-        v-text="subText"
-      />
+      <v-btn small flat class="stat-action" @click="setStatSetting('daily')">
+        <span
+          :class="subTextColor"
+          class="caption font-weight-light"
+          v-text="'Today'"
+        />
+      </v-btn>
+      <v-btn small flat class="stat-action" @click="setStatSetting('monthly')">
+        <span
+          :class="subTextColor"
+          class="caption font-weight-light"
+          v-text="'This Month'"
+        />
+      </v-btn>
     </template>
   </material-card>
 </template>
@@ -50,9 +56,27 @@ import Card from './Card'
 
 export default {
   inheritAttrs: false,
-
+  data () {
+    return {
+      currentView: 'daily'
+    }
+  },
+  methods: {
+    setStatSetting (setting) {
+      this.currentView = setting
+    }
+  },
+  computed: {
+    currentData () {
+      return this.quota[this.currentView]
+    }
+  },
   props: {
     ...Card.props,
+    quota: {
+      type: Object,
+      default: undefined
+    },
     icon: {
       type: String,
       required: true

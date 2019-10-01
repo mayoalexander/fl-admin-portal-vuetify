@@ -52,7 +52,7 @@
           title="Table on Plain Background"
           text="Here is a subtitle for this table"
         >
-          <v-data-table
+          <!-- <v-data-table
             :headers="headers"
             :items="items.slice(0, 7)"
             hide-actions
@@ -75,7 +75,7 @@
               <td>{{ item.city }}</td>
               <td class="text-xs-right">{{ item.salary }}</td>
             </template>
-          </v-data-table>
+          </v-data-table> -->
         </material-card>
       </v-flex>
     </v-layout>
