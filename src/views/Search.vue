@@ -47,14 +47,13 @@ export default {
       headers: [
         {
           sortable: false,
-          text: 'Profile',
+          text: 'Avatar',
           value: 'name'
         },
         {
-          sortable: true,
-          text: 'City',
-          value: 'city',
-          align: 'right'
+          sortable: false,
+          text: 'Profile',
+          value: 'name'
         },
         {
           sortable: true,

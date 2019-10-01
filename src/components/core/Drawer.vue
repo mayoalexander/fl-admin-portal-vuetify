@@ -38,9 +38,11 @@
           v-if="responsive"
         >
           <v-text-field
+            v-model="searchQuery"
             class="purple-input search-input"
             label="Search..."
             color="purple"
+            @keyup.enter="searchSite()"
           />
         </v-list-tile>
         <v-list-tile
@@ -83,9 +85,12 @@ import {
   mapState
 } from 'vuex'
 
+import { fladmin } from '@/utils/fladmin'
+
 export default {
   data: () => ({
     logo: 'https://freelabel.net/assets/img/fllogo.png',
+    searchQuery: null,
     links: [
       {
         to: '/dashboard',
@@ -131,6 +136,14 @@ export default {
         this.responsive = true
       } else {
         this.responsive = false
+      }
+    },
+    async searchSite () {
+      const res = await fladmin.searchProfile(this.searchQuery)
+      this.setDrawer(false)
+      this.$store.commit('SET_SEARCH_RESULTS', res)
+      if (this.$router.currentRoute.path !== '/search') {
+        this.$router.push({ name: 'Search' })
       }
     }
   }
