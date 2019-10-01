@@ -58,7 +58,7 @@
             v-text="link.text"
           />
         </v-list-tile>
-        <v-list-tile
+        <!-- <v-list-tile
           disabled
           active-class="primary"
           class="v-list-item v-list__tile--buy"
@@ -70,7 +70,7 @@
           <v-list-tile-title class="font-weight-light">
             Upgrade To PRO
           </v-list-tile-title>
-        </v-list-tile>
+        </v-list-tile> -->
       </v-layout>
     </v-img>
   </v-navigation-drawer>
