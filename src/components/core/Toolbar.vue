@@ -66,7 +66,7 @@
               <v-icon color="tertiary">mdi-bell</v-icon>
             </v-badge>
           </router-link>
-          <v-card>
+          <v-card color="darkBlue">
             <v-list dense>
               <v-list-tile
                 v-for="notification in notifications"
@@ -97,30 +97,26 @@
 import {
   mapMutations
 } from 'vuex'
+import { fladmin } from '@/utils/fladmin'
 
 export default {
   data: () => ({
-    notifications: [
-      'Mike, John responded to your email',
-      'You have 5 new tasks',
-      'You\'re now a friend with Andrew',
-      'Another Notification',
-      'Another One'
-    ],
+    notifications: [],
     title: null,
     responsive: false,
     responsiveInput: false
   }),
+  async mounted () {
+    this.onResponsiveInverted()
+    window.addEventListener('resize', this.onResponsiveInverted)
 
+    const result = await fladmin.getNotifications()
+    this.notifications = result
+  },
   watch: {
     '$route' (val) {
       this.title = val.name
     }
-  },
-
-  mounted () {
-    this.onResponsiveInverted()
-    window.addEventListener('resize', this.onResponsiveInverted)
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.onResponsiveInverted)
