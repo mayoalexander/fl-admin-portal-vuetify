@@ -132,10 +132,10 @@ export default {
     },
     async searchSite () {
       const res = await fladmin.searchProfile(this.searchQuery)
-      console.log({
-        search: this.searchQuery,
-        res
-      })
+      this.$store.commit('SET_SEARCH_RESULTS', res)
+      if (this.$router.currentRoute.path !== '/search') {
+        this.$router.push({ name: 'Search' })
+      }
     },
     onClick () {
       //

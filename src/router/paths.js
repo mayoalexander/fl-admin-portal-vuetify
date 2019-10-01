@@ -20,6 +20,11 @@ export default [
     view: 'UserProfile'
   },
   {
+    path: '/search',
+    name: 'Search',
+    view: 'Search'
+  },
+  {
     path: '/table-list',
     name: 'Table List',
     view: 'TableList'
