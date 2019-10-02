@@ -8,6 +8,10 @@ export const fladmin = {
     const res = await axios.get('https://freelabel.net/API/Admin/Quotas')
     return res.data.data.status
   },
+  async getUncuratedContent () {
+    const res = await axios.get('https://freelabel.net/API/Discover/getUncuratedContent')
+    return res.data.data.content
+  },
   async searchProfile (query) {
     var options = new URLSearchParams()
     options.append('query', query)

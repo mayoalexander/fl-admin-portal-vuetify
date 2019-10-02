@@ -15,6 +15,11 @@ export default [
     view: 'TopProfiles'
   },
   {
+    path: '/curators/uncurated',
+    name: 'Uncurate Content',
+    view: 'UncuratedContent'
+  },
+  {
     path: '/user-profile',
     name: 'User Profile',
     view: 'UserProfile'

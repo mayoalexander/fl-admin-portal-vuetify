@@ -98,6 +98,11 @@ export default {
         text: 'Dashboard'
       },
       {
+        to: '/curators/uncurated',
+        icon: 'mdi-map-marker',
+        text: 'Uncurated'
+      },
+      {
         to: '/profiles/top',
         icon: 'mdi-map-marker',
         text: 'Top Artists'
