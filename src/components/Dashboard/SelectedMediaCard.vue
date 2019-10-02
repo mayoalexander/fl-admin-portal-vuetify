@@ -10,7 +10,7 @@
         <h3 class="mt-0 mb-0">{{ selectedItem.title }}</h3>
         <p class="mb-0">
           <i class="fa fa-twitter mr-1"></i>
-          <a :href="'https://twitter.com/' + selectedItem.twitter" target="_blank">{{ selectedItem.twitter }}</a>
+          <a :href="'https://twitter.com/' + selectedItem.twitter.replace('@', '')" target="_blank">{{ selectedItem.twitter }}</a>
         </p>
         <p class="mb-0">
           <i class="fa fa-instagram mr-1"></i>
