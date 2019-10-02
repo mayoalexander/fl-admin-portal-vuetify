@@ -53,7 +53,7 @@
                 <v-icon>mdi-plus</v-icon>
               </v-btn> -->
               <v-btn
-                @click="lauchBufferApproval(parse(props.item.data))"
+                @click="lauchBufferApproval(props.item)"
                 small fab>
                 <v-icon>mdi-apps</v-icon>
               </v-btn>
@@ -69,8 +69,8 @@
       max-width="500px"
       transition="dialog-transition"
     >
-      <v-card color="darkBlue" class="white--text">
-        <selected-media-card :selectedItem="selectedItem" />
+      <v-card v-if="selectedItem" color="darkBlue" class="white--text">
+        <selected-media-card :selectedItem="parse(selectedItem.data)" />
 
         <v-card-actions>
           <v-btn color="success lighten-1" block @click="approve(selectedItem)">Approve</v-btn>
@@ -133,11 +133,14 @@ export default {
     },
     approve (item) {
       this.dialog = false
-      const selection = this.queuedPosts
-      selection.splice(selection.indexOf(item), 1)
+      const collection = this.queuedPosts
+      collection.splice(collection.indexOf(item), 1)
+      this.$fladmin.approveBufferQueuePost(item)
     },
     decline (item) {
       this.dialog = false
+      const collection = this.queuedPosts
+      collection.splice(collection.indexOf(item), 1)
     },
   },
   async mounted () {

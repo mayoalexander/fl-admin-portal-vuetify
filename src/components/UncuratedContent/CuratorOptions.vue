@@ -9,7 +9,7 @@
     <v-btn color="primary mb-1" block @click="viewPost()">View Post</v-btn>
     <v-btn color="primary mb-1" block @click="addToPlaylist()">Add To Playlist</v-btn>
     <v-btn color="primary mb-1" block @click="addToExclusives()">Add To Exclusives</v-btn>
-    <v-btn color="primary mb-1" block @click="addToBufferQueue()">Publish to Instagram</v-btn>
+    <v-btn color="primary mb-1" block @click="addToBufferQueue()">Add to Buffer Queue</v-btn>
     <v-btn color="primary mb-1" block>Publish to Twitter</v-btn>
     <v-btn color="primary mb-1" block @click="viewProfile()">View Profile</v-btn>
     <!-- <v-btn color="danger mb-1" block>Delete Track</v-btn> -->
