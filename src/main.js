@@ -36,7 +36,9 @@ import router from '@/router'
 import store from '@/store'
 
 import LoadingSpinner from '@/components/helper/LoadingSpinner'
+import SelectedMediaCard from '@/components/Dashboard/SelectedMediaCard'
 
+Vue.component('selected-media-card', SelectedMediaCard)
 Vue.component('loading-spinner', LoadingSpinner)
 
 // Sync store with router

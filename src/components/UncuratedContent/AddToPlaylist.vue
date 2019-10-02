@@ -5,19 +5,7 @@
 
     <h4 class="headline">Add To Exclusives</h4>
 
-    <v-card class="elevation-1 pa-2">
-      <v-layout row wrap>
-        <v-flex xs3>
-          <v-layout align-center justify-center>
-            <img style="height:80px;width:80px;" :src="selectedItem.photo" />
-          </v-layout>
-        </v-flex>
-        <v-flex xs9>
-          <h3 class="mt-0">{{ selectedItem.title }}</h3>
-          <p>{{ selectedItem.twitter }}</p>
-        </v-flex>
-      </v-layout>
-    </v-card>
+    <selected-media-card :selectedItem="selectedItem"/>
 
     <div class="">
       <h3>Playlist:</h3>

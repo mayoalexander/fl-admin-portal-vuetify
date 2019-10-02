@@ -72,7 +72,7 @@
     <v-dialog
       v-model="dialog"
       scrollable
-      persistent :overlay="false"
+      :overlay="false"
       max-width="500px"
       transition="dialog-transition"
     >
