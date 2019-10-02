@@ -56,6 +56,11 @@
                     small fab>
                     <v-icon>mdi-plus</v-icon>
                   </v-btn>
+                  <v-btn
+                    @click="launchPostOptions(props.item)"
+                    small fab>
+                    <v-icon>mdi-apps</v-icon>
+                  </v-btn>
                 </v-layout>
               </td>
             </template>
@@ -71,41 +76,20 @@
       max-width="500px"
       transition="dialog-transition"
     >
-      <v-card
-        v-if="selectedItem"
-        dark color="darkBlue" class="pa-3">
-
-        <h4 class="headline">Add To Exclusives</h4>
-
-        <v-card class="elevation-1 pa-2">
-          <v-layout row wrap>
-            <v-flex xs3>
-              <v-layout align-center justify-center>
-                <img style="height:80px;width:80px;" :src="selectedItem.photo" />
-              </v-layout>
-            </v-flex>
-            <v-flex xs9>
-              <h3 class="mt-0">{{ selectedItem.title }}</h3>
-              <p>{{ selectedItem.twitter }}</p>
-            </v-flex>
-          </v-layout>
-        </v-card>
-
-        <div class="">
-          <h3>Playlist:</h3>
-          <v-select
-            v-model="selectedPlaylist"
-            :items="allPlaylists"
-            item-text="name"
-            item-value="id"
-            label="label"
-          ></v-select>
-
-          <v-btn @click="addMediaToPlaylist()" block color="primary">Submit</v-btn>
-
-        </div>
-
-      </v-card>
+      <add-to-playlist
+        v-if="dialog_contents === 'add_to_playlist'"
+        :selectedItem="selectedItem"
+        :allPlaylists="allPlaylists"
+        :uncuratedContent="uncuratedContent"
+        :selectedType="selectedType"
+        />
+      <curator-options
+        v-if="dialog_contents === 'more_options'"
+        :selectedItem="selectedItem"
+        :allPlaylists="allPlaylists"
+        :uncuratedContent="uncuratedContent"
+        :selectedType="selectedType"
+        />
     </v-dialog>
 
 
@@ -114,18 +98,22 @@
 
 <script>
 import NotificationsList from '@/components/Notifications/List'
+import AddToPlaylist from '@/components/UncuratedContent/AddToPlaylist'
+import CuratorOptions from '@/components/UncuratedContent/CuratorOptions'
 import { fladmin } from '@/utils/fladmin'
 export default {
   components: {
-    NotificationsList
+    NotificationsList,
+    CuratorOptions,
+    AddToPlaylist
   },
   data () {
     return {
       uncuratedContent: null,
       selectedItem: null,
-      selectedPlaylist: null,
       selectedType: null,
       allPlaylists: null,
+      dialog_contents: null,
       dialog: null,
       types: [
         'track', 'video', 'article'
@@ -176,25 +164,20 @@ export default {
     }
   },
   methods: {
-    addMediaToPlaylist () {
-      console.log({
-        selectedPlaylist: this.selectedPlaylist,
-        selectedItem: this.selectedItem,
-      })
-      this.dialog = false
-      // remove from playlist
-      const selection = this.uncuratedContent[this.selectedType]
-      selection.splice(selection.indexOf(this.selectedItem), 1)
-    },
     addToExclusives (item) {
       // fladmin.addToExclusives(item)
       const selection = this.uncuratedContent[this.selectedType]
       selection.splice(selection.indexOf(item), 1)
     },
     addToPlaylist (item) {
-      // fladmin.addToExclusives(item)
       this.selectedItem = item
       this.dialog = true
+      this.dialog_contents = 'add_to_playlist'
+    },
+    launchPostOptions (item) {
+      this.selectedItem = item
+      this.dialog = true
+      this.dialog_contents = 'more_options'
     },
     playTrack (item) {
       if (item.type === 'video') {
