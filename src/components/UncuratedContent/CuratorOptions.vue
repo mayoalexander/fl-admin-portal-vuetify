@@ -7,8 +7,9 @@
 
     <!-- <v-btn color="primary mb-1" block>Add To Radio</v-btn> -->
     <v-btn color="primary mb-1" block @click="viewPost()">View Post</v-btn>
+    <v-btn color="primary mb-1" block @click="addToPlaylist()">Add To Playlist</v-btn>
     <v-btn color="primary mb-1" block @click="addToExclusives()">Add To Exclusives</v-btn>
-    <v-btn color="primary mb-1" block @click="addToBufferQueue()">Add To Buffer</v-btn>
+    <v-btn color="primary mb-1" block @click="addToBufferQueue()">Publish to Instagram</v-btn>
     <v-btn color="primary mb-1" block>Publish to Twitter</v-btn>
     <v-btn color="primary mb-1" block @click="viewProfile()">View Profile</v-btn>
     <!-- <v-btn color="danger mb-1" block>Delete Track</v-btn> -->
@@ -42,6 +43,9 @@ export default {
     viewProfile () {
       const media = this.selectedItem
       window.open('https://freelabel.net/' + media.twitter)
+    },
+    addToPlaylist () {
+      this.$parent.$parent.$parent.addToPlaylist(this.selectedItem)
     },
     viewPost () {
       const media = this.selectedItem

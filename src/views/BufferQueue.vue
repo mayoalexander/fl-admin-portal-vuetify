@@ -1,0 +1,151 @@
+<template lang="html">
+  <v-container class="pt-0 white--text">
+    <h4 class="display-1 white--text">Buffer Queue</h4>
+    <p class="mb-3">aslkdfjlaksdj</p>
+    <loading-spinner v-if="!queuedPosts" />
+
+    <div v-if="queuedPosts">
+      <v-tabs
+        color="darkBlue"
+        dark
+        slider-color="red"
+      >
+        <v-tab
+          v-for="type in types"
+          :key="type"
+          ripple
+          @click="selectedType = type"
+        >
+          <span class="text-capitalize">{{ type }}s</span>
+
+        </v-tab>
+      </v-tabs>
+
+      <v-data-table
+        :headers="headers"
+        :items="queuedPosts"
+        hide-actions
+        dark
+        background-color="darkBlue"
+        class="darkBlue"
+      >
+        <template slot="items" slot-scope="props">
+          <td class="text-xs-left">
+            <v-btn
+              @click="playTrack(props.item)"
+              color="primary" fab small round>
+              <v-icon>mdi-play</v-icon>
+            </v-btn>
+          </td>
+          <td class="text-xs-left">{{ parse(props.item.data).title }}</td>
+          <td class="text-xs-left">{{ parse(props.item.data).twitter }}</td>
+          <td class="text-xs-right">{{ parse(props.item.data).views }}</td>
+          <td class="text-xs-right">
+            <v-layout row>
+              <!-- <v-btn
+                @click="addToExclusives(props.item)"
+                small fab>
+                <v-icon>mdi-heart</v-icon>
+              </v-btn>
+              <v-btn
+                @click="addToPlaylist(props.item)"
+                small fab>
+                <v-icon>mdi-plus</v-icon>
+              </v-btn> -->
+              <v-btn
+                @click="lauchBufferApproval(parse(props.item.data))"
+                small fab>
+                <v-icon>mdi-apps</v-icon>
+              </v-btn>
+            </v-layout>
+          </td>
+        </template>
+      </v-data-table>
+    </div>
+    <v-dialog
+      v-model="dialog"
+      scrollable
+      :overlay="false"
+      max-width="500px"
+      transition="dialog-transition"
+    >
+      <v-card color="darkBlue" class="white--text">
+        <selected-media-card :selectedItem="selectedItem" />
+
+        <v-card-actions>
+          <v-btn color="success lighten-1" block @click="approve(selectedItem)">Approve</v-btn>
+          <v-btn color="danger lighten-4" block @click="decline(selectedItem)">Decline</v-btn>
+        </v-card-actions>
+
+      </v-card>
+    </v-dialog>
+
+  </v-container>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      queuedPosts: null,
+      selectedItem: null,
+      dialog: null,
+      types: [ 'track', 'video', 'article' ],
+      headers: [
+        {
+          sortable: false,
+          text: '',
+          value: ''
+        },
+        {
+          sortable: true,
+          text: 'Title',
+          value: 'title'
+        },
+        {
+          sortable: true,
+          text: 'Twitter',
+          value: 'twitter',
+          align: 'left'
+        },
+        {
+          sortable: true,
+          text: 'Views',
+          value: 'views',
+          align: 'right'
+        },
+        {
+          sortable: false,
+          text: 'Action',
+          value: 'instagram',
+          align: 'right'
+        }
+      ]
+    }
+  },
+  methods: {
+    parse (data) {
+      return JSON.parse(data)
+    },
+    lauchBufferApproval (item) {
+      this.selectedItem = item
+      this.dialog = true
+    },
+    approve (item) {
+      this.dialog = false
+      const selection = this.queuedPosts
+      selection.splice(selection.indexOf(item), 1)
+    },
+    decline (item) {
+      this.dialog = false
+    },
+  },
+  async mounted () {
+    const res = await this.$fladmin.getBufferQueue()
+    this.queuedPosts = res
+  }
+}
+</script>
+
+<style lang="css" scoped>
+</style>

@@ -103,6 +103,11 @@ export default {
         text: 'Uncurated'
       },
       {
+        to: '/marketing/queue',
+        icon: 'mdi-calendar',
+        text: 'Buffer Queue'
+      },
+      {
         to: '/profiles/top',
         icon: 'mdi-map-marker',
         text: 'Top Artists'

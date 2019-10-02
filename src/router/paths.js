@@ -20,6 +20,11 @@ export default [
     view: 'UncuratedContent'
   },
   {
+    path: '/marketing/queue',
+    name: 'Buffer Queue',
+    view: 'BufferQueue'
+  },
+  {
     path: '/user-profile',
     name: 'User Profile',
     view: 'UserProfile'

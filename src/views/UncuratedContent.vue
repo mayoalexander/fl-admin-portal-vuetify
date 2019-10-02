@@ -46,7 +46,7 @@
               <td class="text-xs-right">{{ props.item.views }}</td>
               <td class="text-xs-right">
                 <v-layout row>
-                  <v-btn
+                  <!-- <v-btn
                     @click="addToExclusives(props.item)"
                     small fab>
                     <v-icon>mdi-heart</v-icon>
@@ -55,7 +55,7 @@
                     @click="addToPlaylist(props.item)"
                     small fab>
                     <v-icon>mdi-plus</v-icon>
-                  </v-btn>
+                  </v-btn> -->
                   <v-btn
                     @click="launchPostOptions(props.item)"
                     small fab>

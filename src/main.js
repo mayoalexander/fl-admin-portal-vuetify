@@ -34,12 +34,15 @@ import App from './App'
 import i18n from '@/i18n'
 import router from '@/router'
 import store from '@/store'
+import { fladmin } from '@/utils/fladmin'
 
 import LoadingSpinner from '@/components/helper/LoadingSpinner'
 import SelectedMediaCard from '@/components/Dashboard/SelectedMediaCard'
 
 Vue.component('selected-media-card', SelectedMediaCard)
 Vue.component('loading-spinner', LoadingSpinner)
+
+Vue.prototype.$fladmin = fladmin
 
 // Sync store with router
 sync(store, router)

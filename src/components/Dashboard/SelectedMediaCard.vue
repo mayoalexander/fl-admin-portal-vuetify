@@ -1,5 +1,5 @@
 <template lang="html">
-  <v-card class="elevation-1 pa-2 mb-0">
+  <v-card v-if="selectedItem" dark class="elevation-1 pa-2 mb-0">
     <v-layout row wrap>
       <v-flex xs3>
         <v-layout align-center justify-center>
@@ -22,13 +22,14 @@
 </template>
 
 <script>
+
 export default {
   props: {
     selectedItem: Object
   },
   methods: {
     getPhoto (media) {
-      if (media.type === 'video') {
+      if (media && media.type === 'video') {
         return 'https://i.ytimg.com/vi/' + media.media_id + '/hqdefault.jpg'
       }
       return this.selectedItem.photo
