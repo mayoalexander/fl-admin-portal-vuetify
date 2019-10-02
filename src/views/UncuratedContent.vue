@@ -165,7 +165,7 @@ export default {
   },
   methods: {
     addToExclusives (item) {
-      // fladmin.addToExclusives(item)
+      fladmin.addToExclusives(item)
       const selection = this.uncuratedContent[this.selectedType]
       selection.splice(selection.indexOf(item), 1)
     },
