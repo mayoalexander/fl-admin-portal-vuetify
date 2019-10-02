@@ -17,7 +17,7 @@ export const fladmin = {
     return res.data.data.content
   },
   async getBufferQueue () {
-    const res = await axios.get('http://freelabel.net/API/Admin/Marketing/GetBufferQueue')
+    const res = await axios.get('https://freelabel.net/API/Admin/Marketing/GetBufferQueue')
     return res.data.data.content
   },
   async searchProfile (query) {
