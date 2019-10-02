@@ -1,65 +1,65 @@
 <template lang="html">
   <v-container class="pt-0 white--text">
     <h4 class="display-1 white--text">Uncurated Content</h4>
+    <p class="mb-3">This is all the content that does NOT have any likes, playlist placements, ratings, or has not been touched by a curator/admin. Review the content below and like them to add to the discover page, and add to a playlist to place it onto themed projects targed to specific demographics.</p>
     <loading-spinner v-if="!content" />
 
-
-    <v-tabs
-      color="darkBlue"
-      dark
-      slider-color="red"
-    >
-      <v-tab
-        v-for="type in types"
-        :key="type"
-        ripple
-        @click="selectedType = type"
+    <div v-if="content">
+      <v-tabs
+        color="darkBlue"
+        dark
+        slider-color="red"
       >
-        <span class="text-capitalize">{{ type }}s</span>
-
-      </v-tab>
-    </v-tabs>
-
-
-
-    <div
-      v-if="content"
-      v-for="type in types">
-      <div v-show="selectedType === type">
-        <!-- <h4>{{ type }}</h4> -->
-        <v-data-table
-          :headers="headers"
-          :items="content[type]"
-          hide-actions
-          dark
-          background-color="darkBlue"
-          class="darkBlue"
+        <v-tab
+          v-for="type in types"
+          :key="type"
+          ripple
+          @click="selectedType = type"
         >
-          <template slot="items" slot-scope="props">
-            <td class="text-xs-left">
-              <v-btn
-                @click="playTrack(props.item)"
-                color="primary" fab small round>
-                <v-icon>mdi-play</v-icon>
-              </v-btn>
-            </td>
-            <td class="text-xs-left">{{ props.item.title }}</td>
-            <td class="text-xs-left">{{ props.item.twitter }}</td>
-            <td class="text-xs-right">{{ props.item.views }}</td>
-            <td class="text-xs-right">
-              <v-layout row>
-                <v-btn small fab>
-                  <v-icon>mdi-heart</v-icon>
+          <span class="text-capitalize">{{ type }}s</span>
+
+        </v-tab>
+      </v-tabs>
+
+      <div
+        v-for="type in types">
+        <div v-show="selectedType === type">
+          <!-- <h4>{{ type }}</h4> -->
+          <v-data-table
+            :headers="headers"
+            :items="content[type]"
+            hide-actions
+            dark
+            background-color="darkBlue"
+            class="darkBlue"
+          >
+            <template slot="items" slot-scope="props">
+              <td class="text-xs-left">
+                <v-btn
+                  @click="playTrack(props.item)"
+                  color="primary" fab small round>
+                  <v-icon>mdi-play</v-icon>
                 </v-btn>
-                <v-btn small fab>
-                  <v-icon>mdi-plus</v-icon>
-                </v-btn>
-              </v-layout>
-            </td>
-          </template>
-        </v-data-table>
+              </td>
+              <td class="text-xs-left">{{ props.item.title }}</td>
+              <td class="text-xs-left">{{ props.item.twitter }}</td>
+              <td class="text-xs-right">{{ props.item.views }}</td>
+              <td class="text-xs-right">
+                <v-layout row>
+                  <v-btn small fab>
+                    <v-icon>mdi-heart</v-icon>
+                  </v-btn>
+                  <v-btn small fab>
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
+                </v-layout>
+              </td>
+            </template>
+          </v-data-table>
+        </div>
       </div>
     </div>
+
 
   </v-container>
 </template>
