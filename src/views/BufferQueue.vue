@@ -38,7 +38,11 @@
               <v-icon>mdi-play</v-icon>
             </v-btn>
           </td>
-          <td class="text-xs-left">{{ parse(props.item.data).title }}</td>
+          <td class="text-xs-left">
+            <a href="#" @click="lauchBufferApproval(props.item)">
+              {{ parse(props.item.data).title }}
+            </a>
+          </td>
           <td class="text-xs-left">{{ parse(props.item.data).twitter }}</td>
           <td class="text-xs-left">{{ parse(props.item.data).type }}</td>
           <td class="text-xs-right">{{ parse(props.item.data).views }}</td>
@@ -67,6 +71,7 @@
     <v-dialog
       v-model="dialog"
       scrollable
+      :persistent="false"
       :overlay="false"
       max-width="500px"
       transition="dialog-transition"
@@ -139,7 +144,11 @@ export default {
     parse (data) {
       return JSON.parse(data)
     },
+    playTrack (item) {
+      this.lauchBufferApproval(item)
+    },
     lauchBufferApproval (item) {
+      event.preventDefault()
       this.selectedItem = item
       this.dialog = true
     },
@@ -159,12 +168,23 @@ export default {
         this.dialog = false
         this.isApproving = false
       })
-
     },
     decline (item) {
-      this.dialog = false
-      const collection = this.queuedPosts
-      collection.splice(collection.indexOf(item), 1)
+      this.isApproving = true
+      this.$fladmin.declineBufferQueuePost(item)
+      .then((res) => {
+        this.dialog = false
+        const collection = this.queuedPosts
+        collection.splice(collection.indexOf(item), 1)
+      })
+      .catch((e) => {
+        // alert('Something went wrong. Please try again later..')
+        console.log({ error: e })
+      })
+      .finally(() => {
+        this.dialog = false
+        this.isApproving = false
+      })
     },
   },
   async mounted () {

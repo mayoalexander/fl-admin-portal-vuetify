@@ -190,12 +190,9 @@ export default {
       this.dialog_contents = 'more_options'
     },
     playTrack (item) {
-      if (item.type === 'video') {
-        alert('play youtube')
-      }
-      if (item.type === 'track') {
-        alert('play track')
-      }
+      this.selectedItem = item
+      this.dialog = true
+      this.dialog_contents = 'more_options'
     }
   }
 }

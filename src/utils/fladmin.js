@@ -47,6 +47,11 @@ export const fladmin = {
     options.append('queue_id', data.id)
     return await axios.post('https://freelabel.net/API/Admin/Marketing/Buffer/Approve', options)
   },
+  async declineBufferQueuePost (data) {
+    var options = new URLSearchParams()
+    options.append('queue_id', data.id)
+    return await axios.post('https://freelabel.net/API/Admin/Marketing/Buffer/Decline', options)
+  },
   async getIncompleteChartingProfiles () {
     const res = await axios.get('https://freelabel.net/API/Admin/Function/getIncompleteChartingProfiles')
     let artists = res.data.data.content

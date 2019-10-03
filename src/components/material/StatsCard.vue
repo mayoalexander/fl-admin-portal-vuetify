@@ -33,7 +33,22 @@
     </div>
 
     <template slot="actions">
-      <v-btn small flat class="stat-action" @click="setStatSetting('daily')">
+      <v-tabs
+        color="darkBlue"
+        dark
+        slider-color="red"
+      >
+        <v-tab
+          v-for="type in options"
+          :key="type"
+          ripple
+          @click="setStatSetting(type)"
+        >
+          <span class="text-capitalize">{{ type }}</span>
+
+        </v-tab>
+      </v-tabs>
+      <!-- <v-btn small flat class="stat-action" @click="setStatSetting('daily')">
         <span
           :class="subTextColor"
           class="caption font-weight-light"
@@ -46,7 +61,7 @@
           class="caption font-weight-light"
           v-text="'This Month'"
         />
-      </v-btn>
+      </v-btn> -->
     </template>
   </material-card>
 </template>
@@ -58,7 +73,8 @@ export default {
   inheritAttrs: false,
   data () {
     return {
-      currentView: 'daily'
+      currentView: 'daily',
+      options: ['monthly','daily']
     }
   },
   methods: {
