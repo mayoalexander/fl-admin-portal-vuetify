@@ -2,10 +2,11 @@
   <v-container class="pt-0 white--text">
     <h4 class="display-1 white--text">Buffer Queue</h4>
     <p class="mb-3">aslkdfjlaksdj</p>
+
     <loading-spinner v-if="!queuedPosts" />
 
     <div v-if="queuedPosts">
-      <v-tabs
+      <!-- <v-tabs
         color="darkBlue"
         dark
         slider-color="red"
@@ -19,7 +20,7 @@
           <span class="text-capitalize">{{ type }}s</span>
 
         </v-tab>
-      </v-tabs>
+      </v-tabs> -->
 
       <v-data-table
         :headers="headers"
@@ -39,9 +40,10 @@
           </td>
           <td class="text-xs-left">{{ parse(props.item.data).title }}</td>
           <td class="text-xs-left">{{ parse(props.item.data).twitter }}</td>
+          <td class="text-xs-left">{{ parse(props.item.data).type }}</td>
           <td class="text-xs-right">{{ parse(props.item.data).views }}</td>
           <td class="text-xs-right">
-            <v-layout row>
+            <v-layout row justify-end>
               <!-- <v-btn
                 @click="addToExclusives(props.item)"
                 small fab>
@@ -72,9 +74,12 @@
       <v-card v-if="selectedItem" color="darkBlue" class="white--text">
         <selected-media-card :selectedItem="parse(selectedItem.data)" />
 
-        <v-card-actions>
-          <v-btn color="success lighten-1" block @click="approve(selectedItem)">Approve</v-btn>
-          <v-btn color="danger lighten-4" block @click="decline(selectedItem)">Decline</v-btn>
+        <div v-if="isApproving">
+          <loading-spinner />
+        </div>
+        <v-card-actions v-else>
+          <v-btn :disabled="isApproving" color="success lighten-1" block @click="approve(selectedItem)">Approve</v-btn>
+          <v-btn :disabled="isApproving" color="danger lighten-4" block @click="decline(selectedItem)">Decline</v-btn>
         </v-card-actions>
 
       </v-card>
@@ -89,6 +94,7 @@ export default {
     return {
       queuedPosts: null,
       selectedItem: null,
+      isApproving: null,
       dialog: null,
       types: [ 'track', 'video', 'article' ],
       headers: [
@@ -106,6 +112,12 @@ export default {
           sortable: true,
           text: 'Twitter',
           value: 'twitter',
+          align: 'left'
+        },
+        {
+          sortable: true,
+          text: 'Type',
+          value: 'type',
           align: 'left'
         },
         {
@@ -131,11 +143,23 @@ export default {
       this.selectedItem = item
       this.dialog = true
     },
-    approve (item) {
-      this.dialog = false
-      const collection = this.queuedPosts
-      collection.splice(collection.indexOf(item), 1)
+    async approve (item) {
+      this.isApproving = true
       this.$fladmin.approveBufferQueuePost(item)
+      .then((res) => {
+        this.dialog = false
+        const collection = this.queuedPosts
+        collection.splice(collection.indexOf(item), 1)
+      })
+      .catch((e) => {
+        // alert('Something went wrong. Please try again later..')
+        console.log({ error: e })
+      })
+      .finally(() => {
+        this.dialog = false
+        this.isApproving = false
+      })
+
     },
     decline (item) {
       this.dialog = false

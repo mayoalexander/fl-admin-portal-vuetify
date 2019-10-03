@@ -32,13 +32,11 @@ export default {
   methods: {
     addToBufferQueue () {
       const media = this.selectedItem
-      fladmin.addToBufferQueue(media)
-      this.$parent.$parent.$parent.dialog = false
+      this.$parent.$parent.$parent.addToBufferQueue(media)
     },
     addToExclusives () {
       const media = this.selectedItem
       this.$parent.$parent.$parent.addToExclusives(media)
-      this.$parent.$parent.$parent.dialog = false
     },
     viewProfile () {
       const media = this.selectedItem

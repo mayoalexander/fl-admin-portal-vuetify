@@ -168,7 +168,17 @@ export default {
       fladmin.addToExclusives(item)
       const selection = this.uncuratedContent[this.selectedType]
       selection.splice(selection.indexOf(item), 1)
+      this.dialog = false
     },
+    addToBufferQueue (media) {
+      fladmin.addToBufferQueue(media)
+      this.dialog = false
+
+      // remove from the array
+      const selection = this.uncuratedContent[this.selectedType]
+      selection.splice(selection.indexOf(media), 1)
+    },
+
     addToPlaylist (item) {
       this.selectedItem = item
       this.dialog = true

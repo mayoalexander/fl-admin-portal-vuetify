@@ -43,14 +43,9 @@ export const fladmin = {
     return res.data.data.profiles
   },
   async approveBufferQueuePost (data) {
-    console.log({
-      data
-    })
-    // var options = new URLSearchParams()
-    // options.append('media_id', data.id)
-    // options.append('media_type', data.type)
-    // const res = await axios.post('https://freelabel.net/API/Admin/Marketing/AddToExclusives', options)
-    // return res.data.data.profiles
+    var options = new URLSearchParams()
+    options.append('queue_id', data.id)
+    return await axios.post('https://freelabel.net/API/Admin/Marketing/Buffer/Approve', options)
   },
   async getIncompleteChartingProfiles () {
     const res = await axios.get('https://freelabel.net/API/Admin/Function/getIncompleteChartingProfiles')
