@@ -1,6 +1,16 @@
 <template lang="html">
   <v-container class="pt-0 white--text">
-    <h4 class="display-1 white--text">Buffer Queue</h4>
+    <h4 class="display-1 white--text">
+      Buffer Queue
+
+      <v-btn
+        href="https://publish.buffer.com/profile/5987abdd9b9dad1c23715d48/tab/queue"
+        target="_blank"
+        color="primary" small>
+        Open Buffer
+      </v-btn>
+
+    </h4>
     <p class="mb-3">aslkdfjlaksdj</p>
 
     <loading-spinner v-if="!queuedPosts" />
@@ -48,16 +58,6 @@
           <td class="text-xs-right">{{ parse(props.item.data).views }}</td>
           <td class="text-xs-right">
             <v-layout row justify-end>
-              <!-- <v-btn
-                @click="addToExclusives(props.item)"
-                small fab>
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
-              <v-btn
-                @click="addToPlaylist(props.item)"
-                small fab>
-                <v-icon>mdi-plus</v-icon>
-              </v-btn> -->
               <v-btn
                 @click="lauchBufferApproval(props.item)"
                 small fab>
