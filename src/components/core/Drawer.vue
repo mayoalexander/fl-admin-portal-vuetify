@@ -99,13 +99,28 @@ export default {
       },
       {
         to: '/curators/uncurated',
-        icon: 'mdi-map-marker',
+        icon: 'mdi-compass',
         text: 'Uncurated'
       },
       {
         to: '/marketing/queue',
-        icon: 'mdi-calendar',
+        icon: 'mdi-filter',
         text: 'Buffer Queue'
+      },
+      {
+        to: '/marketing/exclusives',
+        icon: 'mdi-star',
+        text: 'Exclusives'
+      },
+      {
+        to: '/marketing/campaigns',
+        icon: 'mdi-calendar',
+        text: 'Campaigns'
+      },
+      {
+        to: '/admin/services',
+        icon: 'mdi-ticket',
+        text: 'Services'
       },
       {
         to: '/profiles/top',

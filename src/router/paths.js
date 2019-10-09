@@ -12,17 +12,32 @@ export default [
   {
     path: '/profiles/top',
     name: 'Top Profiles',
-    view: 'TopProfiles'
+    view: 'Marketing/TopProfiles'
   },
   {
     path: '/curators/uncurated',
     name: 'Uncurate Content',
-    view: 'UncuratedContent'
+    view: 'Marketing/UncuratedContent'
   },
   {
     path: '/marketing/queue',
     name: 'Buffer Queue',
-    view: 'BufferQueue'
+    view: 'Marketing/BufferQueue'
+  },
+  {
+    path: '/marketing/exclusives',
+    name: 'Exclusives',
+    view: 'Marketing/Exclusives'
+  },
+  {
+    path: '/marketing/campaigns',
+    name: 'Campaigns',
+    view: 'Marketing/Campaigns'
+  },
+  {
+    path: '/admin/services',
+    name: 'Services',
+    view: 'Admin/Services'
   },
   {
     path: '/user-profile',
