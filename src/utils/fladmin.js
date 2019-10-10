@@ -12,6 +12,19 @@ export const fladmin = {
     const res = await axios.get('https://freelabel.net/API/Discover/getUncuratedContent')
     return res.data.data.content
   },
+  async getCampaigns () {
+    const res = await axios.get('https://freelabel.net/API/Admin/Marketing/Campaigns/GetAll')
+    return res.data.data.content
+  },
+  async getCampaign (campaignId) {
+    var options = new URLSearchParams()
+    options.append('campaign_id', campaignId)
+    const res = await axios.post(
+      'https://freelabel.net/API/Admin/Marketing/Campaigns/GetCampaign',
+      options
+    )
+    return res.data.data.content
+  },
   async getFeaturedPlaylists () {
     const res = await axios.get('https://freelabel.net/API/Discover/getFeaturedPlaylists')
     return res.data.data.content
