@@ -26,8 +26,8 @@
         </v-flex>
         <v-flex>
           <h3>Actions</h3>
-          <v-layout row wrap justify-start>
-            <v-card class="darkBlue px-4 mr-2">
+          <v-layout column wrap justify-start>
+            <v-card xs12 class="darkBlue px-4 pb-3 mb-2">
               <v-switch
                 class="ml-3"
                 color="primary"
@@ -44,13 +44,18 @@
                 value="value"
               ></v-switch>
             </v-card>
-            <v-card class="darkBlue px-4">
+            <v-card xs12 class="darkBlue pt-2 px-4">
               <v-text-field
+                v-if="campaign.actions"
                 name="name"
+                large
                 label="Redirect URL"
                 v-model="JSON.parse(campaign.actions).actions[1].redirect"
                 id="id"
               ></v-text-field>
+              <v-btn small block class="darkBlue white--text">
+                Save
+              </v-btn>
             </v-card>
 
           </v-layout>
