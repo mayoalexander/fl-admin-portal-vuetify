@@ -107,21 +107,21 @@ export default {
         icon: 'mdi-filter',
         text: 'Buffer Queue'
       },
-      {
-        to: '/marketing/exclusives',
-        icon: 'mdi-star',
-        text: 'Exclusives'
-      },
+      // {
+      //   to: '/marketing/exclusives',
+      //   icon: 'mdi-star',
+      //   text: 'Exclusives'
+      // },
       {
         to: '/marketing/campaigns',
         icon: 'mdi-calendar',
         text: 'Campaigns'
       },
-      {
-        to: '/admin/services',
-        icon: 'mdi-ticket',
-        text: 'Services'
-      },
+      // {
+      //   to: '/admin/services',
+      //   icon: 'mdi-ticket',
+      //   text: 'Services'
+      // },
       {
         to: '/profiles/top',
         icon: 'mdi-map-marker',
