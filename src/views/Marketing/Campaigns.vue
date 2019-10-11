@@ -12,6 +12,8 @@
         :headers="headers"
         :items="campaigns"
         hide-actions
+        color="darkBlue"
+        class="darkBlue"
       >
         <template
           slot="headerCell"
