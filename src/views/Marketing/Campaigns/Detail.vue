@@ -20,51 +20,6 @@
         </v-layout>
       </v-layout>
 
-      <v-layout wrap space-between>
-        <v-flex>
-          <h2 class="headline">{{ campaign.description }}</h2>
-        </v-flex>
-        <v-flex>
-          <h3>Actions</h3>
-          <v-layout column wrap justify-start>
-            <!-- campaign.redirect_url {{ campaign.redirect_url }} -->
-            <v-card xs12 class="darkBlue px-4 pb-3 mb-2">
-              <v-switch
-                class="ml-3"
-                color="primary"
-                v-switch="campaign.log_scan"
-                dark light
-                error error-messages="errorMessages"
-                false-value="falseValue"
-                hide-details
-                hint persistent-hint
-                input-value="inputValue"
-                label="Log Scan"
-                loading="false"
-                ripple="true"
-                validate-on-blur
-                value="value"
-              ></v-switch>
-            </v-card>
-            <v-card xs12 class="darkBlue pt-2 px-4">
-              <v-text-field
-                v-if="campaign.redirect_url"
-                name="name"
-                large
-                label="Redirect URL"
-                v-model="campaign.redirect_url"
-                id="id"
-              ></v-text-field>
-              <v-btn small block class="darkBlue white--text">
-                Save
-              </v-btn>
-            </v-card>
-
-          </v-layout>
-        </v-flex>
-      </v-layout>
-
-
       <v-layout row wrap space-between>
         <v-flex xs12 sm6>
           <h2 class="headline">Campaign Items</h2>
@@ -112,6 +67,51 @@
           </v-card>
         </v-flex>
       </v-layout>
+
+      <v-layout wrap space-between>
+        <v-flex>
+          <h2 class="headline">{{ campaign.description }}</h2>
+        </v-flex>
+        <v-flex>
+          <h3>Actions</h3>
+          <v-layout column wrap justify-start>
+            <!-- campaign.redirect_url {{ campaign.redirect_url }} -->
+            <v-card xs12 class="darkBlue px-4 pb-3 mb-2">
+              <v-switch
+                class="ml-3"
+                color="primary"
+                v-model="campaign.log_scan"
+                dark light
+                error error-messages="errorMessages"
+                false-value="falseValue"
+                hide-details
+                hint persistent-hint
+                input-value="inputValue"
+                label="Log Scan"
+                loading="false"
+                validate-on-blur
+                value="value"
+              ></v-switch>
+            </v-card>
+            <v-card xs12 class="darkBlue pt-2 px-4">
+              <v-text-field
+                v-if="campaign.redirect_url"
+                name="name"
+                large
+                label="Redirect URL"
+                v-model="campaign.redirect_url"
+                id="id"
+              ></v-text-field>
+              <v-btn small block class="darkBlue white--text"
+                @click="saveActions()">
+                Save
+              </v-btn>
+            </v-card>
+
+          </v-layout>
+        </v-flex>
+      </v-layout>
+
     </div>
     <loading-spinner v-else />
   </v-container>
@@ -136,6 +136,11 @@ export default {
       event.preventDefault()
       event.stopPropagation()
       window.open('https://freelabel.net/' + item.type + '/' + item.id)
+    },
+    saveActions () {
+      // this.$fladmin.updateCampaign({
+      //
+      // })
     }
   },
   async mounted () {
