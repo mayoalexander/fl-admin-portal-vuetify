@@ -24,9 +24,37 @@
         <v-flex>
           <h2 class="headline">{{ campaign.description }}</h2>
         </v-flex>
-        <!-- <v-flex>
-          <img :src="campaign.qr_code" height="100px" width="100px" alt="">
-        </v-flex> -->
+        <v-flex>
+          <h3>Actions</h3>
+          <v-layout row wrap justify-start>
+            <v-card class="darkBlue px-4 mr-2">
+              <v-switch
+                class="ml-3"
+                color="primary"
+                dark light
+                error error-messages="errorMessages"
+                false-value="falseValue"
+                hide-details
+                hint persistent-hint
+                input-value="inputValue"
+                label="Log Scan"
+                loading="false"
+                ripple="true"
+                validate-on-blur
+                value="value"
+              ></v-switch>
+            </v-card>
+            <v-card class="darkBlue px-4">
+              <v-text-field
+                name="name"
+                label="Redirect URL"
+                v-model="JSON.parse(campaign.actions).actions[1].redirect"
+                id="id"
+              ></v-text-field>
+            </v-card>
+
+          </v-layout>
+        </v-flex>
       </v-layout>
 
 
