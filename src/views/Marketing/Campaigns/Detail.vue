@@ -27,10 +27,12 @@
         <v-flex>
           <h3>Actions</h3>
           <v-layout column wrap justify-start>
+            <!-- campaign.redirect_url {{ campaign.redirect_url }} -->
             <v-card xs12 class="darkBlue px-4 pb-3 mb-2">
               <v-switch
                 class="ml-3"
                 color="primary"
+                v-switch="campaign.log_scan"
                 dark light
                 error error-messages="errorMessages"
                 false-value="falseValue"
@@ -46,11 +48,11 @@
             </v-card>
             <v-card xs12 class="darkBlue pt-2 px-4">
               <v-text-field
-                v-if="campaign.actions"
+                v-if="campaign.redirect_url"
                 name="name"
                 large
                 label="Redirect URL"
-                v-model="JSON.parse(campaign.actions).actions[1].redirect"
+                v-model="campaign.redirect_url"
                 id="id"
               ></v-text-field>
               <v-btn small block class="darkBlue white--text">
@@ -68,7 +70,7 @@
           <h2 class="headline">Campaign Items</h2>
           <list-item v-for="(item, i) in campaign.attached_items" :item="item" />
         </v-flex>
-        <v-flex xs12 sm6 class="px-2">
+        <v-flex xs12 sm6 class="">
           <h2 class="headline">Profiles</h2>
           <v-card
             v-for="item in campaign.attached_users" :item="item"
