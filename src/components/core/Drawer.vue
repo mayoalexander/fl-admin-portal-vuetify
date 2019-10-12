@@ -23,11 +23,11 @@
           <v-list-tile-avatar
             color="transparent"
           >
-          <img
-            :src="logo"
-            height="34"
-            contain
-          />
+            <img
+              :src="logo"
+              height="34"
+              contain
+            >
           </v-list-tile-avatar>
           <v-list-tile-title class="title">
             FLADM.IN

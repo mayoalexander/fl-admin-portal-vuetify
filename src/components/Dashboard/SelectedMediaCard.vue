@@ -1,5 +1,8 @@
 <template lang="html">
-  <v-card v-if="selectedItem" color="darkBlue" class="elevation-1 mb-0">
+  <v-card
+    v-if="selectedItem"
+    color="darkBlue"
+    class="elevation-1 mb-0">
     <!-- <v-layout row wrap>
       <v-flex xs3>
         <v-layout align-center justify-center>
@@ -22,7 +25,12 @@
     </v-layout> -->
 
     <div class="">
-      <iframe :src="getURL()" width="100%" height="490px" scrolling="no" frameborder="0"></iframe>
+      <iframe
+        :src="getURL()"
+        width="100%"
+        height="490px"
+        scrolling="no"
+        frameborder="0"/>
     </div>
 
   </v-card>

@@ -5,22 +5,34 @@
     <!-- this is the campaign -->
     <!-- {{ campaigns }} -->
     <v-card
-      class="darkBlue white--text mb-2"
-      v-for="item in campaigns">
-      <v-layout row wrap class="">
+      v-for="(item, i) in campaigns"
+      :key="i"
+      class="darkBlue white--text mb-2">
+      <v-layout
+        row
+        wrap
+        class="">
         <v-flex xs2>
-          <v-img :src="item.photo" height="50" width="50" />
+          <v-img
+            :src="item.photo"
+            height="50"
+            width="50" />
         </v-flex>
-        <v-flex xs7 class="text-truncate">
+        <v-flex
+          xs7
+          class="text-truncate">
           <h4>{{ item.title }}</h4>
         </v-flex>
         <!-- <v-flex><span class="headline title">{{ item.total_views }}</span></v-flex> -->
         <!-- <v-flex>{{ item.attached_items.length }}</v-flex> -->
         <!-- <v-flex>{{ item.attached_media.length }}</v-flex> -->
-        <v-flex xs2 class="text-xs-right">
+        <v-flex
+          xs2
+          class="text-xs-right">
           <v-btn
             :to="'/marketing/campaigns/' + item.id"
-            small color="darkBlue">
+            small
+            color="darkBlue">
             View
           </v-btn>
         </v-flex>
@@ -71,9 +83,7 @@
       color="green"
       title="Active Campaigns"
       text="Campaigns are projects that you can attach actions, media, content, profiles, etc. They are used to create global initatives that use a collection of assets to create maximum impact."
-    >
-
-    </material-card>
+    />
   </v-container>
 </template>
 
@@ -83,28 +93,28 @@ export default {
     return {
       campaigns: null,
       headers: [
-      {
-        sortable: false,
-        text: 'Name',
-        value: 'name'
-      },
-      {
-        sortable: false,
-        text: 'Total Views',
-        value: 'country'
-      },
-      {
-        sortable: false,
-        text: 'Campaign Items',
-        value: 'city'
-      },
-      {
-        sortable: false,
-        text: 'Attached Media',
-        value: 'salary',
-        align: 'right'
-      }
-    ]
+        {
+          sortable: false,
+          text: 'Name',
+          value: 'name'
+        },
+        {
+          sortable: false,
+          text: 'Total Views',
+          value: 'country'
+        },
+        {
+          sortable: false,
+          text: 'Campaign Items',
+          value: 'city'
+        },
+        {
+          sortable: false,
+          text: 'Attached Media',
+          value: 'salary',
+          align: 'right'
+        }
+      ]
     }
   },
   async mounted () {

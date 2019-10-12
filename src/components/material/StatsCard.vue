@@ -71,22 +71,6 @@ import Card from './Card'
 
 export default {
   inheritAttrs: false,
-  data () {
-    return {
-      currentView: 'daily',
-      options: ['monthly','daily']
-    }
-  },
-  methods: {
-    setStatSetting (setting) {
-      this.currentView = setting
-    }
-  },
-  computed: {
-    currentData () {
-      return this.quota[this.currentView]
-    }
-  },
   props: {
     ...Card.props,
     quota: {
@@ -124,6 +108,22 @@ export default {
     smallValue: {
       type: String,
       default: undefined
+    }
+  },
+  data () {
+    return {
+      currentView: 'daily',
+      options: ['monthly', 'daily']
+    }
+  },
+  computed: {
+    currentData () {
+      return this.quota[this.currentView]
+    }
+  },
+  methods: {
+    setStatSetting (setting) {
+      this.currentView = setting
     }
   }
 }

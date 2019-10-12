@@ -1,10 +1,20 @@
 <template lang="html">
   <v-container class="white--text">
     <div v-if="isLoaded">
-      <v-layout wrap column space-between>
-        <v-layout xs12 align-center justify-center class="mb-3">
+      <v-layout
+        wrap
+        column
+        space-between>
+        <v-layout
+          xs12
+          align-center
+          justify-center
+          class="mb-3">
           <div class="mb-3">
-            <v-img :src="campaign.photo" height="160px" width="160px" />
+            <v-img
+              :src="campaign.photo"
+              height="160px"
+              width="160px" />
           </div>
         </v-layout>
         <v-flex class="text-xs-center px-2">
@@ -12,42 +22,81 @@
           <h5 class="title">{{ campaign.subtitle }}</h5>
           <p class="grey--text lighten-3">Created at: {{ campaign.created_at }}</p>
         </v-flex>
-        <v-layout align-center justify-center column class="my-3">
-          <img :src="campaign.qr_code" height="160px" width="160px" alt="">
-          <v-btn :href="campaignURL" small class="success" target="_blank" :style="{
-            width: '160px'
-          }">
+        <v-layout
+          align-center
+          justify-center
+          column
+          class="my-3">
+          <img
+            :src="campaign.qr_code"
+            height="160px"
+            width="160px"
+            alt="">
+          <v-btn
+            :href="campaignURL"
+            :style="{
+              width: '160px'
+            }"
+            small
+            class="success"
+            target="_blank">
             Preview Scan
           </v-btn>
         </v-layout>
       </v-layout>
 
-      <v-layout row wrap space-between>
+      <v-layout
+        row
+        wrap
+        space-between>
         <v-flex
           v-if="campaign.attached_items.length > 0"
-          xs12 sm6>
+          xs12
+          sm6>
           <!-- <h2 class="headline">Campaign Items</h2> -->
           <h2 class="headline">Services</h2>
-          <list-item v-for="(item, i) in campaign.attached_items" :item="item" />
+          <list-item
+            v-for="(item, i) in campaign.attached_items"
+            :key="i"
+            :item="item" />
         </v-flex>
         <v-flex
           v-if="campaign.attached_users.length > 0"
-          xs12 sm6 class="">
+          xs12
+          sm6
+          class="">
           <h2 class="headline">Profiles</h2>
           <v-card
-            v-for="item in campaign.attached_users" :item="item"
+            v-for="(item, x) in campaign.attached_users"
+            :key="x"
+            :item="item"
             class="darkBlue white--text mb-1">
             <v-card-text>
-              <v-layout row wrap>
-                <v-flex xs2 sm1>
-                  <v-img :src="item.photo" height="60px" width="60px"/>
+              <v-layout
+                row
+                wrap>
+                <v-flex
+                  xs2
+                  sm1>
+                  <v-img
+                    :src="item.photo"
+                    height="60px"
+                    width="60px"/>
                 </v-flex>
-                <v-layout xs10 sm11 justify-start align-start column class="pl-3 text-truncate">
-                  <a :href="'https://freelabel.net/content/profile/' + item.pk" target="_blank">
+                <v-layout
+                  xs10
+                  sm11
+                  justify-start
+                  align-start
+                  column
+                  class="pl-3 text-truncate">
+                  <a
+                    :href="'https://freelabel.net/content/profile/' + item.pk"
+                    target="_blank">
                     <span class="font-weight-bold mr-1 mb-1">{{ item.name }}</span>
                   </a>
-                  <div class="ml-0"><i class="fa fa-twitter"></i> {{ item.twitter }}</div>
-                  <div class="ml-0"><i class="fa fa-instagram"></i> {{ item.instagram }}</div>
+                  <div class="ml-0"><i class="fa fa-twitter"/> {{ item.twitter }}</div>
+                  <div class="ml-0"><i class="fa fa-instagram"/> {{ item.instagram }}</div>
                 </v-layout>
               </v-layout>
             </v-card-text>
@@ -58,16 +107,30 @@
           xs12>
           <h2 class="headline">Media</h2>
           <v-card
-            v-for="(item, i) in campaign.attached_media" :item="item"
-            class="darkBlue white--text mb-1"
+            v-for="(item, y) in campaign.attached_media"
+            :key="y"
+            :item="item"
             :href="'https://freelabel.net/content/' + item.type + '/' + item.id"
+            class="darkBlue white--text mb-1"
             target="_blank">
             <v-card-text>
-              <v-layout row wrap>
-                <v-flex xs2 sm1>
-                  <v-img :src="item.photo" height="60px" width="60px"/>
+              <v-layout
+                row
+                wrap>
+                <v-flex
+                  xs2
+                  sm1>
+                  <v-img
+                    :src="item.photo"
+                    height="60px"
+                    width="60px"/>
                 </v-flex>
-                <v-layout xs10 sm11 justify-start align-center class="pl-3 text-truncate">
+                <v-layout
+                  xs10
+                  sm11
+                  justify-start
+                  align-center
+                  class="pl-3 text-truncate">
                   <span>{{ item.twitter }}</span>
                   - "{{ item.title }}"
                 </v-layout>
@@ -77,41 +140,56 @@
         </v-flex>
       </v-layout>
 
-      <v-layout wrap space-between>
+      <v-layout
+        wrap
+        space-between>
         <v-flex>
           <h2 class="headline text-xs-center">{{ campaign.description }}</h2>
         </v-flex>
         <v-flex>
           <h3>Actions</h3>
-          <v-layout column wrap justify-start>
+          <v-layout
+            column
+            wrap
+            justify-start>
             <!-- campaign.redirect_url {{ campaign.redirect_url }} -->
-            <v-card xs12 class="darkBlue px-4 pb-3 mb-2">
+            <v-card
+              xs12
+              class="darkBlue px-4 pb-3 mb-2">
               <v-switch
+                v-model="campaign.log_scan"
                 class="ml-3"
                 color="primary"
-                v-model="campaign.log_scan"
-                dark light
-                error error-messages="errorMessages"
+                dark
+                light
+                error
+                error-messages="errorMessages"
                 false-value="falseValue"
                 hide-details
-                hint persistent-hint
+                hint
+                persistent-hint
                 input-value="inputValue"
                 label="Log Scan"
                 loading="false"
                 validate-on-blur
                 value="value"
-              ></v-switch>
+              />
             </v-card>
-            <v-card xs12 class="darkBlue pt-2 px-4">
+            <v-card
+              xs12
+              class="darkBlue pt-2 px-4">
               <v-text-field
                 v-if="campaign.redirect_url"
+                id="id"
+                v-model="campaign.redirect_url"
                 name="name"
                 large
                 label="Redirect URL"
-                v-model="campaign.redirect_url"
-                id="id"
-              ></v-text-field>
-              <v-btn small block class="darkBlue white--text"
+              />
+              <v-btn
+                small
+                block
+                class="darkBlue white--text"
                 @click="saveActions()">
                 Save
               </v-btn>
@@ -140,6 +218,17 @@ export default {
       isLoaded: false
     }
   },
+  computed: {
+    campaignURL () {
+      return 'https://freelabel.net/?campaign=' + this.campaign.id + '&popup=true'
+    }
+  },
+  async mounted () {
+    const campaignId = this.$router.currentRoute.params.id
+    const campaign = await this.$fladmin.getCampaign(campaignId)
+    this.campaign = campaign
+    this.isLoaded = true
+  },
   methods: {
     openMedia (item) {
       event.preventDefault()
@@ -151,17 +240,6 @@ export default {
       //
       // })
     }
-  },
-  computed: {
-   campaignURL () {
-      return 'https://freelabel.net/?campaign=' + this.campaign.id + '&popup=true'
-    }
-  },
-  async mounted () {
-    const campaignId = this.$router.currentRoute.params.id
-    const campaign = await this.$fladmin.getCampaign(campaignId)
-    this.campaign = campaign
-    this.isLoaded = true
   }
 }
 </script>

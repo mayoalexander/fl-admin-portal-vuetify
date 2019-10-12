@@ -20,13 +20,13 @@
         lg4
       >
         <material-stats-card
+          :quota="quotas.payments"
+          :value="'$' + quotas.payments.daily.current.toString()"
+          :small-value="'/' + quotas.payments.daily.quota"
           class="darkBlue"
           color="red"
           icon="mdi-wallet"
           title="Payments"
-          :quota="quotas.payments"
-          :value="'$' + quotas.payments.daily.current.toString()"
-          :small-value="'/' + quotas.payments.daily.quota"
           sub-icon="mdi-calendar"
           sub-text="Today"
         />
@@ -38,13 +38,13 @@
         lg4
       >
         <material-stats-card
+          :quota="quotas.services"
+          :value="quotas.services.daily.current.toString()"
+          :small-value="'/' + quotas.services.daily.quota"
           class="darkBlue"
           color="blue"
           icon="mdi-content-copy"
           title="Services"
-          :quota="quotas.services"
-          :value="quotas.services.daily.current.toString()"
-          :small-value="'/' + quotas.services.daily.quota"
           sub-icon="mdi-calendar"
           sub-text="Today"
         />
@@ -56,13 +56,13 @@
         lg4
       >
         <material-stats-card
+          :quota="quotas.uploads"
+          :value="quotas.uploads.daily.current.toString()"
+          :small-value="'/' + quotas.uploads.daily.quota"
           class="darkBlue"
           color="purple"
           icon="mdi-upload"
           title="Uploads"
-          :quota="quotas.uploads"
-          :value="quotas.uploads.daily.current.toString()"
-          :small-value="'/' + quotas.uploads.daily.quota"
           sub-icon="mdi-calendar"
           sub-text="Today"
         />
@@ -74,13 +74,13 @@
         lg6
       >
         <material-stats-card
+          :quota="quotas.signup"
+          :value="quotas.signup.daily.current.toString()"
+          :small-value="'/' + quotas.signup.daily.quota"
           class="darkBlue"
           color="teal"
           icon="mdi-pen"
           title="Signups"
-          :quota="quotas.signup"
-          :value="quotas.signup.daily.current.toString()"
-          :small-value="'/' + quotas.signup.daily.quota"
           sub-icon="mdi-calendar"
           sub-text="Today"
         />
@@ -92,32 +92,32 @@
         lg6
       >
         <material-stats-card
+          :quota="quotas.views"
+          :value="quotas.views.daily.current.toString()"
+          :small-value="'/' + quotas.views.daily.quota"
           class="darkBlue"
           color="orange"
           icon="mdi-eye"
           title="Views"
-          :quota="quotas.views"
-          :value="quotas.views.daily.current.toString()"
-          :small-value="'/' + quotas.views.daily.quota"
           sub-icon="mdi-alert"
           sub-text="Get More Space..."
         />
       </v-flex>
       <v-flex
+        v-if="quotas.scans"
         sm6
         xs12
         md6
         lg6
-        v-if="quotas.scans"
       >
         <material-stats-card
+          :quota="quotas.scans"
+          :value="quotas.scans.daily.current.toString()"
+          :small-value="'/' + quotas.scans.daily.quota"
           class="darkBlue"
           color="green"
           icon="mdi-qrcode"
           title="Scans"
-          :quota="quotas.scans"
-          :value="quotas.scans.daily.current.toString()"
-          :small-value="'/' + quotas.scans.daily.quota"
           sub-icon="mdi-alert"
           sub-text="Get More Space..."
         />
@@ -132,7 +132,7 @@
           :top_artists="topArtists"
           :headers="headers"
           class="darkBlue"
-          />
+        />
       </v-flex>
 
     </v-layout>
@@ -140,7 +140,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import DashboardGraphs from '@/components/Dashboard/Graphs'
 import ProfileList from '@/components/Profile/List'
 import { fladmin } from '@/utils/fladmin'
@@ -269,14 +268,14 @@ export default {
       return this.top_artists
     }
   },
+  async mounted () {
+    const quotas = await fladmin.getQuotas()
+    this.quotas = quotas
+  },
   methods: {
     complete (index) {
       this.list[index] = !this.list[index]
     }
-  },
-  async mounted () {
-    const quotas = await fladmin.getQuotas()
-    this.quotas = quotas
   }
 }
 </script>

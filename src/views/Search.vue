@@ -4,8 +4,8 @@
       dark
       background-color="darkBlue"
       class="darkBlue elevation-1 py-2">
-        <div v-if="searchResults">
-          <v-data-table
+      <div v-if="searchResults">
+        <v-data-table
           :headers="headers"
           :items="searchResults"
           color="darkBlue"
@@ -14,9 +14,13 @@
           background-color="darkBlue"
           class="darkBlue"
         >
-          <template slot="items" slot-scope="props">
+          <template
+            slot="items"
+            slot-scope="props">
             <td class="text-xs-right">
-              <img :src="props.item.photo" style="width:48px;height:48px;border-radius:50%;"/>
+              <img
+                :src="props.item.photo"
+                style="width:48px;height:48px;border-radius:50%;">
             </td>
             <!-- <td class="text-xs-right"></td> -->
             <td class="text-xs-left">
@@ -29,13 +33,15 @@
             </td>
             <td class="text-xs-right">{{ props.item.city }} {{ props.item.state }}</td>
             <td class="text-xs-right">
-              <v-btn dark small >
+              <v-btn
+                dark
+                small >
                 View
               </v-btn>
             </td>
           </template>
         </v-data-table>
-        </div>
+      </div>
     </v-card>
   </v-container>
 </template>
@@ -75,7 +81,7 @@ export default {
       let result
       const obj = this.$store.state.searchResults
       if (obj) {
-        result = Object.keys(obj).map(function(key) {
+        result = Object.keys(obj).map(function (key) {
           return obj[key]
         })
       }

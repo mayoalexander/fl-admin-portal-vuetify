@@ -7,7 +7,7 @@
       :notifications="notifications"
       :headers="headers"
       class="darkBlue"
-      />
+    />
   </v-container>
 </template>
 
@@ -37,14 +37,14 @@ export default {
       ]
     }
   },
-  async mounted () {
-    const result = await fladmin.getNotifications()
-    this.notifications = result
-  },
   computed: {
     topArtists () {
       return this.top_artists
     }
+  },
+  async mounted () {
+    const result = await fladmin.getNotifications()
+    this.notifications = result
   }
 }
 </script>

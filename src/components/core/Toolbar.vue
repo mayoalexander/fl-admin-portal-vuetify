@@ -109,17 +109,17 @@ export default {
     responsiveInput: false,
     searchQuery: null
   }),
+  watch: {
+    '$route' (val) {
+      this.title = val.name
+    }
+  },
   async mounted () {
     this.onResponsiveInverted()
     window.addEventListener('resize', this.onResponsiveInverted)
 
     const result = await fladmin.getNotifications()
     this.notifications = result
-  },
-  watch: {
-    '$route' (val) {
-      this.title = val.name
-    }
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.onResponsiveInverted)

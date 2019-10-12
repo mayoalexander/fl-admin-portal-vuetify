@@ -7,7 +7,7 @@
       :top_artists="topArtists"
       :headers="headers"
       class="darkBlue"
-      />
+    />
   </v-container>
 </template>
 
@@ -42,14 +42,14 @@ export default {
       ]
     }
   },
-  async mounted () {
-    const artists = await fladmin.getIncompleteChartingProfiles()
-    this.top_artists = artists
-  },
   computed: {
     topArtists () {
       return this.top_artists
     }
+  },
+  async mounted () {
+    const artists = await fladmin.getIncompleteChartingProfiles()
+    this.top_artists = artists
   }
 }
 </script>

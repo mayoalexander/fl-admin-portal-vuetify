@@ -22,7 +22,8 @@
       </v-tabs>
 
       <div
-        v-for="type in types">
+        v-for="(type, i) in types"
+        :key="i">
         <div v-show="selectedType === type">
           <!-- <h4>{{ type }}</h4> -->
           <v-data-table
@@ -33,11 +34,16 @@
             background-color="darkBlue"
             class="darkBlue"
           >
-            <template slot="items" slot-scope="props">
+            <template
+              slot="items"
+              slot-scope="props">
               <td class="text-xs-left">
                 <v-btn
-                  @click="playTrack(props.item)"
-                  color="primary" fab small round>
+                  color="primary"
+                  fab
+                  small
+                  round
+                  @click="playTrack(props.item)">
                   <v-icon>mdi-play</v-icon>
                 </v-btn>
               </td>
@@ -57,8 +63,9 @@
                     <v-icon>mdi-plus</v-icon>
                   </v-btn> -->
                   <v-btn
-                    @click="launchPostOptions(props.item)"
-                    small fab>
+                    small
+                    fab
+                    @click="launchPostOptions(props.item)">
                     <v-icon>mdi-apps</v-icon>
                   </v-btn>
                 </v-layout>
@@ -71,27 +78,26 @@
 
     <v-dialog
       v-model="dialog"
-      scrollable
       :overlay="false"
+      scrollable
       max-width="500px"
       transition="dialog-transition"
     >
       <add-to-playlist
         v-if="dialog_contents === 'add_to_playlist'"
-        :selectedItem="selectedItem"
-        :allPlaylists="allPlaylists"
-        :uncuratedContent="uncuratedContent"
-        :selectedType="selectedType"
-        />
+        :selected-item="selectedItem"
+        :all-playlists="allPlaylists"
+        :uncurated-content="uncuratedContent"
+        :selected-type="selectedType"
+      />
       <curator-options
         v-if="dialog_contents === 'more_options'"
-        :selectedItem="selectedItem"
-        :allPlaylists="allPlaylists"
-        :uncuratedContent="uncuratedContent"
-        :selectedType="selectedType"
-        />
+        :selected-item="selectedItem"
+        :all-playlists="allPlaylists"
+        :uncurated-content="uncuratedContent"
+        :selected-type="selectedType"
+      />
     </v-dialog>
-
 
   </v-container>
 </template>
@@ -150,6 +156,11 @@ export default {
       ]
     }
   },
+  computed: {
+    content () {
+      return this.uncuratedContent
+    }
+  },
   async mounted () {
     const result = await fladmin.getUncuratedContent()
     this.uncuratedContent = result
@@ -157,11 +168,6 @@ export default {
 
     const res = await fladmin.getFeaturedPlaylists()
     this.allPlaylists = res
-  },
-  computed: {
-    content () {
-      return this.uncuratedContent
-    }
   },
   methods: {
     addToExclusives (item) {

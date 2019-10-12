@@ -30,13 +30,22 @@
       >
         <!-- <td>{{ index + 1 }}</td> -->
         <td class="font-weight-bold">
-          <a :href="'https://freelabel.net/' + item.twitter" target="_blank" class="lightGrey--text">{{ item.name }}</a>
+          <a
+            :href="'https://freelabel.net/' + item.twitter"
+            target="_blank"
+            class="lightGrey--text">{{ item.name }}</a>
         </td>
         <td class="text-xs-right">
-          <a :href="'https://instagram.com/' + item.instagram" target="_blank" class="lightGrey--text">{{ item.instagram }}</a>
+          <a
+            :href="'https://instagram.com/' + item.instagram"
+            target="_blank"
+            class="lightGrey--text">{{ item.instagram }}</a>
         </td>
         <td class="text-xs-right">
-          <a :href="'https://twitter.com/' + item.twitter" target="_blank" class="lightGrey--text">{{ item.twitter }}</a>
+          <a
+            :href="'https://twitter.com/' + item.twitter"
+            target="_blank"
+            class="lightGrey--text">{{ item.twitter }}</a>
         </td>
       </template>
     </v-data-table>

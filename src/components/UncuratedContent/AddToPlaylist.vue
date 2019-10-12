@@ -1,11 +1,13 @@
 <template lang="html">
   <v-card
     v-if="selectedItem"
-    dark color="darkBlue" class="pa-3">
+    dark
+    color="darkBlue"
+    class="pa-3">
 
     <h4 class="headline">Add To Exclusives</h4>
 
-    <selected-media-card :selectedItem="selectedItem"/>
+    <selected-media-card :selected-item="selectedItem"/>
 
     <div class="">
       <h3>Playlist:</h3>
@@ -15,8 +17,11 @@
         item-text="name"
         item-value="id"
         label="label"
-      ></v-select>
-      <v-btn @click="addMediaToPlaylist()" block color="primary">Submit</v-btn>
+      />
+      <v-btn
+        block
+        color="primary"
+        @click="addMediaToPlaylist()">Submit</v-btn>
     </div>
   </v-card>
 </template>
@@ -31,7 +36,7 @@ export default {
   },
   data () {
     return {
-      selectedPlaylist: null,
+      selectedPlaylist: null
     }
   },
   methods: {
@@ -45,7 +50,7 @@ export default {
       // remove from playlist
       const selection = this.uncuratedContent[this.selectedType]
       selection.splice(selection.indexOf(this.selectedItem), 1)
-    },
+    }
   }
 }
 </script>
