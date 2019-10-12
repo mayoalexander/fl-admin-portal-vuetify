@@ -1,7 +1,7 @@
 <template lang="html">
   <v-container class="white--text">
     <div v-if="isLoaded">
-      <v-layout wrap space-between>
+      <v-layout wrap column space-between>
         <v-layout xs12 align-center justify-center class="mb-3">
           <div class="mb-3">
             <v-img :src="campaign.photo" height="160px" width="160px" />
@@ -23,12 +23,16 @@
       </v-layout>
 
       <v-layout row wrap space-between>
-        <v-flex xs12 sm6>
+        <v-flex
+          v-if="campaign.attached_items.length > 0"
+          xs12 sm6>
           <!-- <h2 class="headline">Campaign Items</h2> -->
           <h2 class="headline">Services</h2>
           <list-item v-for="(item, i) in campaign.attached_items" :item="item" />
         </v-flex>
-        <v-flex xs12 sm6 class="">
+        <v-flex
+          v-if="campaign.attached_users.length > 0"
+          xs12 sm6 class="">
           <h2 class="headline">Profiles</h2>
           <v-card
             v-for="item in campaign.attached_users" :item="item"
@@ -49,7 +53,9 @@
             </v-card-text>
           </v-card>
         </v-flex>
-        <v-flex xs12>
+        <v-flex
+          v-if="campaign.attached_media.length > 0"
+          xs12>
           <h2 class="headline">Media</h2>
           <v-card
             v-for="(item, i) in campaign.attached_media" :item="item"
@@ -73,7 +79,7 @@
 
       <v-layout wrap space-between>
         <v-flex>
-          <h2 class="headline">{{ campaign.description }}</h2>
+          <h2 class="headline text-xs-center">{{ campaign.description }}</h2>
         </v-flex>
         <v-flex>
           <h3>Actions</h3>
