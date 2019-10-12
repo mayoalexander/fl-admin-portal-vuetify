@@ -3,8 +3,8 @@
     <div v-if="isLoaded">
       <v-layout wrap space-between>
         <v-layout xs12 align-center justify-center class="mb-3">
-          <div class="">
-            <v-img :src="campaign.photo" height="100" width="100" />
+          <div class="mb-3">
+            <v-img :src="campaign.photo" height="160px" width="160px" />
           </div>
         </v-layout>
         <v-flex class="text-xs-center px-2">
@@ -12,17 +12,20 @@
           <h5 class="title">{{ campaign.subtitle }}</h5>
           <p class="grey--text lighten-3">Created at: {{ campaign.created_at }}</p>
         </v-flex>
-        <v-layout justify-center>
-          <div class="">
-            <img :src="campaign.qr_code" height="100px" width="100px" alt="">
-            <!-- <v-btn color="primary" block>Launch</v-btn> -->
-          </div>
+        <v-layout align-center justify-center column class="my-3">
+          <img :src="campaign.qr_code" height="160px" width="160px" alt="">
+          <v-btn :href="campaignURL" small class="success" target="_blank" :style="{
+            width: '160px'
+          }">
+            Preview Scan
+          </v-btn>
         </v-layout>
       </v-layout>
 
       <v-layout row wrap space-between>
         <v-flex xs12 sm6>
-          <h2 class="headline">Campaign Items</h2>
+          <!-- <h2 class="headline">Campaign Items</h2> -->
+          <h2 class="headline">Services</h2>
           <list-item v-for="(item, i) in campaign.attached_items" :item="item" />
         </v-flex>
         <v-flex xs12 sm6 class="">
@@ -141,6 +144,11 @@ export default {
       // this.$fladmin.updateCampaign({
       //
       // })
+    }
+  },
+  computed: {
+   campaignURL () {
+      return 'https://freelabel.net/?campaign=' + this.campaign.id + '&popup=true'
     }
   },
   async mounted () {
