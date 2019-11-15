@@ -119,7 +119,7 @@ export default {
       },
       {
         to: '/services/studios',
-        icon: 'mdi-calendar',
+        icon: 'mdi-home',
         text: 'Studios'
       },
       // {
