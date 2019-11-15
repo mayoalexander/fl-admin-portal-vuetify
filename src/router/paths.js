@@ -35,6 +35,11 @@ export default [
     view: 'Marketing/Campaigns'
   },
   {
+    path: '/services/studios',
+    name: 'Studios',
+    view: 'Services/Studios'
+  },
+  {
     path: '/marketing/campaigns/:id',
     name: 'Campaigns Detail',
     view: 'Marketing/Campaigns/Detail'

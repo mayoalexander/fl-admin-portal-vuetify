@@ -117,6 +117,11 @@ export default {
         icon: 'mdi-calendar',
         text: 'Campaigns'
       },
+      {
+        to: '/services/studios',
+        icon: 'mdi-calendar',
+        text: 'Studios'
+      },
       // {
       //   to: '/admin/services',
       //   icon: 'mdi-ticket',
