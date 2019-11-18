@@ -40,6 +40,11 @@ export default [
     view: 'Services/Studios'
   },
   {
+    path: '/marketing/branding',
+    name: 'Branding',
+    view: 'Marketing/Branding'
+  },
+  {
     path: '/marketing/campaigns/:id',
     name: 'Campaigns Detail',
     view: 'Marketing/Campaigns/Detail'

@@ -118,8 +118,13 @@ export default {
         text: 'Campaigns'
       },
       {
+        to: '/marketing/branding',
+        icon: 'mdi-user',
+        text: 'Branding'
+      },
+      {
         to: '/services/studios',
-        icon: 'mdi-home',
+        icon: 'mdi-location_city',
         text: 'Studios'
       },
       // {
