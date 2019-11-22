@@ -10,7 +10,7 @@
         {{ item.title }}
       </v-tab>
     </v-tabs>
-    <div class="container white--text">
+    <div class="white--text pt-2">
       <!-- selectedTab: {{ selectedTab }} -->
       <pending-publishing v-show="selectedTab === 'pending_publishing'"/>
       <active-orders v-show="selectedTab === 'active_orders'"/>
