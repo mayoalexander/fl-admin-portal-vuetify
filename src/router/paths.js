@@ -35,9 +35,19 @@ export default [
     view: 'Marketing/Campaigns'
   },
   {
+    path: '/services',
+    name: 'Services',
+    view: 'Services/Index'
+  },
+  {
     path: '/services/studios',
     name: 'Studios',
     view: 'Services/Studios'
+  },
+  {
+    path: '/services/pending/publishing',
+    name: 'Services/Pending/Publishing',
+    view: 'Services/Pending/Publishing'
   },
   {
     path: '/marketing/branding',

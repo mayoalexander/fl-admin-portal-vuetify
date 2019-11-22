@@ -118,6 +118,11 @@ export default {
         text: 'Campaigns'
       },
       {
+        to: '/services',
+        icon: 'mdi-suitcase',
+        text: 'Services'
+      },
+      {
         to: '/marketing/branding',
         icon: 'mdi-user',
         text: 'Branding'
