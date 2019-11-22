@@ -1,7 +1,8 @@
 <template>
   <v-container>
     <v-tabs
-      dark grow>
+      dark
+      grow>
       <v-tab
         v-for="item in tabs"
         :key="item.key"
@@ -10,14 +11,12 @@
       </v-tab>
     </v-tabs>
     <div class="container white--text">
-
-      selectedTab: {{ selectedTab }}
+      <!-- selectedTab: {{ selectedTab }} -->
       <pending-publishing v-show="selectedTab === 'pending_publishing'"/>
       <active-orders v-show="selectedTab === 'active_orders'"/>
     </div>
   </v-container>
 </template>
-
 
 <script>
 import PendingPublishing from '@/views/Services/Pending/Publishing'
@@ -41,6 +40,9 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    this.selectTab(this.tabs[0].key)
   },
   methods: {
     selectTab (tab) {

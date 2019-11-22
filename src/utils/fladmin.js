@@ -16,6 +16,13 @@ export const fladmin = {
     const res = await axios.get('https://freelabel.net/API/Admin/Marketing/Campaigns/GetAll')
     return res.data.data.content
   },
+  async getPendingPublishing () {
+    const res = await axios.get('https://freelabel.net/API/Admin/Services/GetPendingPublishing')
+    console.log({
+      res
+    })
+    return res.data.data.content
+  },
   async getCampaign (campaignId) {
     var options = new URLSearchParams()
     options.append('campaign_id', campaignId)
@@ -54,6 +61,11 @@ export const fladmin = {
     options.append('media_type', data.type)
     const res = await axios.post('https://freelabel.net/API/Admin/Marketing/AddToExclusives', options)
     return res.data.data.profiles
+  },
+  async approvePendingService (data) {
+    var options = new URLSearchParams()
+    options.append('service_id', data.id)
+    return axios.post('https://freelabel.net/API/Admin/Services/Approve', options)
   },
   async approveBufferQueuePost (data) {
     var options = new URLSearchParams()
