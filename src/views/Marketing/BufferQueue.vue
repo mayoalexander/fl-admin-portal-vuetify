@@ -10,6 +10,13 @@
         small>
         Open Buffer
       </v-btn>
+      <v-btn
+        href="https://freelabel.net/admin/automation"
+        target="_blank"
+        color="primary"
+        small>
+        Open Automation
+      </v-btn>
 
     </h4>
     <p class="mb-3">aslkdfjlaksdj</p>
