@@ -44,7 +44,7 @@
         <v-btn
           color="primary"
           target="_blank"
-          href="https://freelabel.net/pages/services/marketplace/admin/1">
+          href="https://freelabel.net/studios">
           <v-icon class="mr-1">mdi-cart</v-icon>
           Open Studio Marketplace
         </v-btn>
