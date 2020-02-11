@@ -119,17 +119,17 @@ export default {
       },
       {
         to: '/services',
-        icon: 'mdi-suitcase',
+        icon: 'mdi-star',
         text: 'Services'
       },
       {
         to: '/marketing/branding',
-        icon: 'mdi-user',
+        icon: 'mdi-store',
         text: 'Branding'
       },
       {
         to: '/services/studios',
-        icon: 'mdi-location_city',
+        icon: 'mdi-web',
         text: 'Studios'
       },
       // {
