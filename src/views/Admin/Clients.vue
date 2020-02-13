@@ -8,13 +8,19 @@
     </div>
     <div class="clients-list px-4">
       <v-text-field
-        label="Search Users"
         v-model="query"
-      ></v-text-field>
+        label="Search Users"
+      />
 
-      <v-card v-for="(item, i) in filteredUsers" class="mb-3 pa-3" :key="i">
+      <v-card
+        v-for="(item, i) in filteredUsers"
+        :key="i"
+        dark
+        class="mb-3 pa-3">
         <p v-if="item.id">ID: {{ item.id }} - [{{ item.user_name }}]</p>
-        <p v-if="item.email" class="font-weight-bold">{{ item.email }}</p>
+        <p
+          v-if="item.email"
+          class="font-weight-bold">{{ item.email }}</p>
         <p v-if="item.phone">{{ item.phone }}</p>
         <p v-if="item.date_created">
           <span class="font-weight-bold">Created: </span>
@@ -26,8 +32,20 @@
         </p>
 
         <div class="more-info">
-          <p v-if="item.dashboard_type" class="mt-3">DB UI Type: <span class="font-weight-bold text-capitalize">{{ item.dashboard_type }}</span></p>
+          <p
+            v-if="item.dashboard_type"
+            class="mt-3">DB UI Type: <span class="font-weight-bold text-capitalize">{{ item.dashboard_type }}</span></p>
         </div>
+
+        <div class="actions">
+          <v-btn
+            class="primary"
+            small
+            @click="viewUser(item)">
+            View
+          </v-btn>
+        </div>
+
       </v-card>
     </div>
   </div>
@@ -40,11 +58,6 @@ export default {
     return {
       allUsers: null,
       query: ''
-    }
-  },
-  methods: {
-    formatDate (date) {
-      return this.$dayjs(date).format('ddd, MMM D, YYYY - h:mmA')
     }
   },
   computed: {
@@ -71,6 +84,14 @@ export default {
     console.log({
       clients
     })
+  },
+  methods: {
+    formatDate (date) {
+      return this.$dayjs(date).format('ddd, MMM D, YYYY - h:mmA')
+    },
+    viewUser (user) {
+      this.$router.push('/admin/clients/' + user.id)
+    }
   }
 }
 </script>

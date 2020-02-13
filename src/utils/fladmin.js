@@ -43,6 +43,14 @@ export const fladmin = {
     })
     return res.data.data.users
   },
+  async getUser (userId) {
+    const params = new URLSearchParams({ user_id: userId })
+    const res = await axios.post('https://freelabel.net/API/Admin/Clients/GetUser', params)
+    console.log({
+      res
+    })
+    return res.data.data.user
+  },
   async getBufferQueue () {
     const res = await axios.get('https://freelabel.net/API/Admin/Marketing/GetBufferQueue')
     return res.data.data.content

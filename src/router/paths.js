@@ -70,6 +70,11 @@ export default [
     view: 'Admin/Clients'
   },
   {
+    path: '/admin/clients/:id',
+    name: 'Clients',
+    view: 'Admin/Clients/Detail'
+  },
+  {
     path: '/user-profile',
     name: 'User Profile',
     view: 'UserProfile'

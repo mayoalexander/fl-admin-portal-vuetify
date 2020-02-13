@@ -123,6 +123,11 @@ export default {
         text: 'Services'
       },
       {
+        to: '/admin/clients',
+        icon: 'mdi-key',
+        text: 'Clients'
+      },
+      {
         to: '/marketing/branding',
         icon: 'mdi-store',
         text: 'Branding'
