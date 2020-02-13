@@ -8,7 +8,9 @@
       class="darkBlue white--text pa-3 mb-2">
       <div>
         <h1 class="headline mt-0">
-          <a :href="'https://freelabel.net/pages/services/marketplace/community/' + item.id" target="_blank">
+          <a
+            :href="'https://freelabel.net/pages/services/marketplace/community/' + item.id"
+            target="_blank">
             {{ item.title }} - ${{ item.price }}
           </a>
         </h1>
@@ -24,7 +26,7 @@
             @click="approveService(item)">
             Approve
           </v-btn>
-            <v-btn
+          <v-btn
             small
             color="primary"
             @click="viewProfile(item)">

@@ -36,6 +36,8 @@ import router from '@/router'
 import store from '@/store'
 import { fladmin } from '@/utils/fladmin'
 
+import dayjs from 'dayjs'
+
 import LoadingSpinner from '@/components/helper/LoadingSpinner'
 import SelectedMediaCard from '@/components/Dashboard/SelectedMediaCard'
 
@@ -43,6 +45,7 @@ Vue.component('selected-media-card', SelectedMediaCard)
 Vue.component('loading-spinner', LoadingSpinner)
 
 Vue.prototype.$fladmin = fladmin
+Vue.prototype.$dayjs = dayjs
 
 // Sync store with router
 sync(store, router)

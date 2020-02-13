@@ -36,6 +36,13 @@ export const fladmin = {
     const res = await axios.get('https://freelabel.net/API/Discover/getFeaturedPlaylists')
     return res.data.data.content
   },
+  async getAllUsers () {
+    const res = await axios.get('https://freelabel.net/API/Admin/Clients/GetAll')
+    console.log({
+      res
+    })
+    return res.data.data.users
+  },
   async getBufferQueue () {
     const res = await axios.get('https://freelabel.net/API/Admin/Marketing/GetBufferQueue')
     return res.data.data.content

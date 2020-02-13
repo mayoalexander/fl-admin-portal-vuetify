@@ -65,6 +65,11 @@ export default [
     view: 'Admin/Services'
   },
   {
+    path: '/admin/clients',
+    name: 'Clients',
+    view: 'Admin/Clients'
+  },
+  {
     path: '/user-profile',
     name: 'User Profile',
     view: 'UserProfile'
