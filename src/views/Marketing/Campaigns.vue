@@ -5,6 +5,7 @@
     <!-- this is the campaign -->
     <!-- {{ campaigns }} -->
     <v-card
+      :to="'/marketing/campaigns/' + item.id"
       v-for="(item, i) in campaigns"
       :key="i"
       class="darkBlue white--text mb-2">
@@ -38,45 +39,6 @@
         </v-flex>
       </v-layout>
     </v-card>
-
-    <!-- <v-data-table
-      :headers="headers"
-      :items="campaigns"
-      hide-actions
-      color="darkBlue"
-      class="darkBlue"
-    >
-      <template
-        slot="headerCell"
-        slot-scope="{ header }"
-      >
-        <span
-          class="subheading font-weight-light text-success text--darken-3"
-          v-text="header.text"
-        />
-      </template>
-      <template
-        slot="items"
-        slot-scope="{ item }"
-      >
-        <td>
-          <v-img :src="item.photo" height="50" width="50" />
-        </td>
-        <td class="text-truncate">
-          <h4>{{ item.title }}</h4>
-        </td>
-        <td><span class="headline title">{{ item.total_views }}</span></td>
-        <td>{{ item.attached_items.length }}</td>
-        <td>{{ item.attached_media.length }}</td>
-        <td class="text-xs-right">
-          <v-btn
-            :to="'/marketing/campaigns/' + item.id"
-            small color="darkBlue">
-            View
-          </v-btn>
-        </td>
-      </template>
-    </v-data-table> -->
 
     <material-card
       v-if="campaigns"

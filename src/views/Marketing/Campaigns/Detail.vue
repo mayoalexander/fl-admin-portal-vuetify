@@ -33,13 +33,12 @@
             width="160px"
             alt="">
           <v-btn
-            :href="campaignURL"
+            @click="previewScan(campaignURL)"
             :style="{
               width: '160px'
             }"
             small
-            class="success"
-            target="_blank">
+            class="success">
             Preview Scan
           </v-btn>
         </v-layout>
@@ -49,18 +48,17 @@
         row
         wrap
         space-between>
-        <v-flex
+        <!-- <v-flex
           v-if="campaign.attached_items.length > 0"
           xs12
           sm6>
-          <!-- <h2 class="headline">Campaign Items</h2> -->
           <h2 class="headline">Services</h2>
           <list-item
             v-for="(item, i) in campaign.attached_items"
             :key="i"
             :item="item" />
-        </v-flex>
-        <v-flex
+        </v-flex> -->
+        <!-- <v-flex
           v-if="campaign.attached_users.length > 0"
           xs12
           sm6
@@ -101,7 +99,8 @@
               </v-layout>
             </v-card-text>
           </v-card>
-        </v-flex>
+        </v-flex> -->
+
         <v-flex
           v-if="campaign.attached_media.length > 0"
           xs12>
@@ -144,15 +143,11 @@
         wrap
         space-between>
         <v-flex>
-          <h2 class="headline text-xs-center">{{ campaign.description }}</h2>
-        </v-flex>
-        <v-flex>
           <h3>Actions</h3>
           <v-layout
             column
             wrap
             justify-start>
-            <!-- campaign.redirect_url {{ campaign.redirect_url }} -->
             <v-card
               xs12
               class="darkBlue px-4 pb-3 mb-2">
@@ -235,6 +230,9 @@ export default {
       event.preventDefault()
       event.stopPropagation()
       window.open('https://freelabel.net/' + item.type + '/' + item.id)
+    },
+    previewScan (url) {
+      window.open(url)
     },
     saveActions () {
       // this.$fladmin.updateCampaign({
