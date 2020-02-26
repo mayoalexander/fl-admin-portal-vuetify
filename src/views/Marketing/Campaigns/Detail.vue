@@ -220,7 +220,8 @@ export default {
   },
   computed: {
     campaignURL () {
-      return 'https://freelabel.net/?campaign=' + this.campaign.id + '&popup=true'
+      // return 'https://freelabel.net/?campaign=' + this.campaign.id + '&popup=true'
+      return this.campaign.redirect_url
     }
   },
   async mounted () {
