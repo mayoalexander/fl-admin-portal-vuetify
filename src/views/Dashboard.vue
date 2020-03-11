@@ -38,12 +38,13 @@
         md6
         lg4
       >
+        <!-- color="blue" -->
         <material-stats-card
           :quota="quotas.services"
           :value="quotas.services.daily.current.toString()"
           :small-value="'/' + quotas.services.daily.quota"
           class="darkBlue"
-          color="blue"
+          color="grey"
           icon="mdi-content-copy"
           title="Services"
           sub-icon="mdi-calendar"
