@@ -48,13 +48,15 @@
 
         </v-tab>
       </v-tabs>
-      <!-- <v-btn small flat class="stat-action" @click="setStatSetting('daily')">
+      <v-spacer />
+      <v-btn v-if="link"  small flat class="stat-action" @click="cardAction()">
         <span
           :class="subTextColor"
           class="caption font-weight-light"
-          v-text="'Today'"
+          v-text="'Details'"
         />
       </v-btn>
+      <!--
       <v-btn small flat class="stat-action" @click="setStatSetting('monthly')">
         <span
           :class="subTextColor"
@@ -108,12 +110,16 @@ export default {
     smallValue: {
       type: String,
       default: undefined
+    },
+    link: {
+      type: String,
+      default: undefined
     }
   },
   data () {
     return {
       currentView: 'daily',
-      options: ['monthly', 'daily']
+      options: ['daily', 'monthly']
     }
   },
   computed: {
@@ -121,9 +127,17 @@ export default {
       return this.quota[this.currentView]
     }
   },
+  mounted () {
+    this.setStatSetting('daily')
+  },
   methods: {
     setStatSetting (setting) {
       this.currentView = setting
+    },
+    cardAction () {
+      if (this.link) {
+        this.$router.push(this.link)
+      }
     }
   }
 }

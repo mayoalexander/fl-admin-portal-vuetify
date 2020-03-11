@@ -19,12 +19,13 @@
         md6
         lg4
       >
+        <!-- color="red" -->
         <material-stats-card
           :quota="quotas.payments"
           :value="'$' + quotas.payments.daily.current.toString()"
           :small-value="'/' + quotas.payments.daily.quota"
           class="darkBlue"
-          color="red"
+          color="grey"
           icon="mdi-wallet"
           title="Payments"
           sub-icon="mdi-calendar"
@@ -47,6 +48,7 @@
           title="Services"
           sub-icon="mdi-calendar"
           sub-text="Today"
+          link="/services"
         />
       </v-flex>
       <v-flex
@@ -83,6 +85,7 @@
           title="Signups"
           sub-icon="mdi-calendar"
           sub-text="Today"
+          link="/admin/clients"
         />
       </v-flex>
       <v-flex
@@ -101,6 +104,7 @@
           title="Views"
           sub-icon="mdi-alert"
           sub-text="Get More Space..."
+          link="/profiles/top"
         />
       </v-flex>
       <v-flex
