@@ -35,7 +35,8 @@
             <td class="text-xs-right">
               <v-btn
                 dark
-                small >
+                small
+                @click="viewArtist(props.item)">
                 View
               </v-btn>
             </td>
@@ -86,6 +87,11 @@ export default {
         })
       }
       return result
+    }
+  },
+  methods: {
+    viewArtist (profile) {
+      window.open('https://freelabel.net/content/profile/' + profile.pk)
     }
   }
 }

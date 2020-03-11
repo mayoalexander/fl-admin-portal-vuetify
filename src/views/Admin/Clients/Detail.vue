@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 white--text">
+  <div v-if="user" class="px-4 white--text">
     <v-layout wrap>
       <v-flex
         xs12
@@ -40,8 +40,8 @@
         xs12
         sm6
         class="mb-3 text-xs-center px-2">
-        <div class="data-box pa-4">
-          <!-- Profiles -->
+        <div class="data-box profiles pa-4 mb-3">
+          Attached Profiles
           <div
             v-if="user.profiles"
             class="profiles-list">
@@ -53,6 +53,21 @@
           </div>
           <div v-else>
             <p class="warning--text">No profiles found..</p>
+          </div>
+        </div>
+        <div class="data-box profiles pa-4 mb-3">
+          Following
+          <div
+            v-if="user.following"
+            class="profiles-list">
+            <li
+              v-for="(item, i) in user.following"
+              :key="i">
+              <a :href="'https://freelabel.net/content/profile/' + item.pk" target="_blank">{{ item.name }}</a>
+            </li>
+          </div>
+          <div v-else>
+            <p class="warning--text">No profiles following..</p>
           </div>
         </div>
       </v-flex>

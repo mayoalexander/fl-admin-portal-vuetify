@@ -82,13 +82,13 @@
             </v-list>
           </v-card>
         </v-menu>
-        <router-link
+        <!-- <router-link
           v-ripple
           class="toolbar-items"
           to="/user-profile"
         >
           <v-icon color="tertiary">mdi-account</v-icon>
-        </router-link>
+        </router-link> -->
       </v-flex>
     </v-toolbar-items>
   </v-toolbar>
