@@ -5,8 +5,8 @@
     <!-- this is the campaign -->
     <!-- {{ campaigns }} -->
     <v-card
-      :to="'/marketing/campaigns/' + item.id"
       v-for="(item, i) in campaigns"
+      :to="'/marketing/campaigns/' + item.id"
       :key="i"
       class="darkBlue white--text mb-2">
       <v-layout

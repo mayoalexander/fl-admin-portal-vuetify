@@ -49,7 +49,12 @@
         </v-tab>
       </v-tabs>
       <v-spacer />
-      <v-btn v-if="link"  small flat class="stat-action" @click="cardAction()">
+      <v-btn
+        v-if="link"
+        small
+        flat
+        class="stat-action"
+        @click="cardAction()">
         <span
           :class="subTextColor"
           class="caption font-weight-light"

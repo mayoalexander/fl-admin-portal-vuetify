@@ -33,12 +33,12 @@
             width="160px"
             alt="">
           <v-btn
-            @click="previewScan(campaignURL)"
             :style="{
               width: '160px'
             }"
             small
-            class="success">
+            class="success"
+            @click="previewScan(campaignURL)">
             Preview Scan
           </v-btn>
         </v-layout>
