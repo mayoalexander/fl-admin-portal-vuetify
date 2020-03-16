@@ -51,7 +51,10 @@
         <template
           slot="items"
           slot-scope="props">
-          <td class="text-xs-left">
+          <td class="text-xs-left pa-0 pr-2">
+            <v-img :src="parse(props.item.data).photo" alt="" :style="{ width: '116px' }" />
+          </td>
+          <!-- <td class="text-xs-left">
             <v-btn
               color="primary"
               fab
@@ -60,15 +63,16 @@
               @click="playTrack(props.item)">
               <v-icon>mdi-play</v-icon>
             </v-btn>
-          </td>
+          </td> -->
           <td class="text-xs-left">
             <a
               href="#"
-              @click="lauchBufferApproval(props.item)">
+              @click="lauchBufferApproval(props.item)"
+              class="white--text">
               {{ parse(props.item.data).title }}
             </a>
           </td>
-          <td class="text-xs-left">{{ parse(props.item.data).twitter }}</td>
+          <td class="text-xs-left red--text font-weight-bold">{{ parse(props.item.data).twitter }}</td>
           <td class="text-xs-left">{{ parse(props.item.data).type }}</td>
           <td class="text-xs-right">{{ parse(props.item.data).views }}</td>
           <td class="text-xs-right">
@@ -98,8 +102,20 @@
         v-if="selectedItem"
         color="darkBlue"
         class="white--text">
-        <selected-media-card :selected-item="parse(selectedItem.data)" />
-
+        <div
+          v-if="previewPost"
+          class="media-preview">
+          <selected-media-card :selected-item="parse(selectedItem.data)" />
+        </div>
+        <div v-else class="img-preview">
+          <img
+            :src="selectedItem.photo"
+            :style="{
+              width: '100%'
+            }"
+            class="w-100 img-fluid" >
+        </div>
+        <!-- selectedItem: {{ selectedItem.photo }} -->
         <div v-if="isApproving">
           <loading-spinner />
         </div>
@@ -114,6 +130,12 @@
             color="danger lighten-4"
             block
             @click="decline(selectedItem)">Decline</v-btn>
+          <v-btn
+            :disabled="isApproving"
+            color="lighten-4"
+            class="black--text"
+            block
+            @click="preview(selectedItem)">Preview</v-btn>
         </v-card-actions>
 
       </v-card>
@@ -126,6 +148,7 @@
 export default {
   data () {
     return {
+      previewPost: false,
       queuedPosts: null,
       selectedItem: null,
       isApproving: null,
@@ -182,6 +205,7 @@ export default {
     },
     lauchBufferApproval (item) {
       event.preventDefault()
+      this.previewPost = false
       this.selectedItem = item
       this.dialog = true
     },
@@ -201,6 +225,7 @@ export default {
           this.dialog = false
           this.isApproving = false
         })
+      this.previewPost = false
     },
     decline (item) {
       this.isApproving = true
@@ -218,6 +243,10 @@ export default {
           this.dialog = false
           this.isApproving = false
         })
+      this.previewPost = false
+    },
+    preview () {
+      this.previewPost = true
     }
   }
 }

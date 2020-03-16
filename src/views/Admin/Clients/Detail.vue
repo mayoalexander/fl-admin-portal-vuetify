@@ -1,5 +1,7 @@
 <template>
-  <div v-if="user" class="px-4 white--text">
+  <div
+    v-if="user"
+    class="px-4 white--text">
     <v-layout wrap>
       <v-flex
         xs12
@@ -63,7 +65,9 @@
             <li
               v-for="(item, i) in user.following"
               :key="i">
-              <a :href="'https://freelabel.net/content/profile/' + item.pk" target="_blank">{{ item.name }}</a>
+              <a
+                :href="'https://freelabel.net/content/profile/' + item.pk"
+                target="_blank">{{ item.name }}</a>
             </li>
           </div>
           <div v-else>
