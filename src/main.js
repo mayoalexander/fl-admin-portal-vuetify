@@ -41,8 +41,13 @@ import dayjs from 'dayjs'
 import LoadingSpinner from '@/components/helper/LoadingSpinner'
 import SelectedMediaCard from '@/components/Dashboard/SelectedMediaCard'
 
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
+
 Vue.component('selected-media-card', SelectedMediaCard)
 Vue.component('loading-spinner', LoadingSpinner)
+
+Vue.use(VueSweetalert2)
 
 Vue.prototype.$fladmin = fladmin
 Vue.prototype.$dayjs = dayjs

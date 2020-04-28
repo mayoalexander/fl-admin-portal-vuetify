@@ -80,7 +80,7 @@ export const fladmin = {
   async approvePendingService (data) {
     var options = new URLSearchParams()
     options.append('service_id', data.id)
-    return axios.post('https://freelabel.net/API/Admin/Services/Approve', options)
+    return axios.post('http://dev.freelabel.net/API/Admin/Services/Approve', options)
   },
   async approveBufferQueuePost (data) {
     var options = new URLSearchParams()
